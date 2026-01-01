@@ -6,8 +6,10 @@
 ![Privacy](https://img.shields.io/badge/Data-Local%20Only-red)
 
 > **nFIRE** is a deterministic financial independence engine. Unlike simple calculators that rely on the "4% Rule," nFIRE simulates your financial life year-by-year, strictly enforcing Canadian progressive tax brackets, RRSP meltdown strategies, and pension integration to determine your absolute solvency.
->> [**Live Demo**](https://shfqrkhn.github.io/nFIRE/)
-> > ![nFIRE App Interface](https://raw.githubusercontent.com/shfqrkhn/nFIRE/refs/heads/main/%7BACC736FF-639E-4E05-97B9-0754025950F0%7D.png)
+> 
+> [**Live Demo**](https://shfqrkhn.github.io/nFIRE/)
+>
+> ![nFIRE App Interface](https://raw.githubusercontent.com/shfqrkhn/nFIRE/refs/heads/main/%7BACC736FF-639E-4E05-97B9-0754025950F0%7D.png)
 
 ---
 
