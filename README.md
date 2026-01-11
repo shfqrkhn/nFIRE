@@ -1,11 +1,13 @@
+--- START OF FILE README.md ---
+
 # 🌌 nFIRE: The Singularity Solvency Engine
 
-![Version](https://img.shields.io/badge/Version-1.0.0-neon)
-![Status](https://img.shields.io/badge/Status-Gold%20Master-success)
+![Version](https://img.shields.io/badge/Version-10.1.0-neon)
+![Status](https://img.shields.io/badge/Status-Universal-success)
 ![License](https://img.shields.io/badge/License-MIT-blue)
-![Privacy](https://img.shields.io/badge/Data-Local%20Only-red)
+![Privacy](https://img.shields.io/badge/Data-Local_Only-red)
 
-> **nFIRE** is a deterministic financial independence engine. Unlike simple calculators that rely on the "4% Rule," nFIRE simulates your financial life year-by-year, strictly enforcing Canadian progressive tax brackets, RRSP meltdown strategies, and pension integration to determine your absolute solvency.
+> **nFIRE** is a deterministic financial independence engine. Unlike simple calculators that rely on the "4% Rule," nFIRE simulates your financial life year-by-year, strictly enforcing Canadian progressive tax brackets, RRSP meltdown strategies, and complex Defined Benefit pension vesting to determine your absolute solvency.
 
 [**Live Demo**](https://shfqrkhn.github.io/nFIRE/)
 
@@ -16,14 +18,16 @@
 ## 📖 Table of Contents
 
 1. [The Philosophy](#-the-philosophy)
-2. [Quick Start](#-quick-start)
+2. [Features & Capabilities](#-features--capabilities)
 3. [User Manual (Pilot's Handbook)](#-user-manual-pilots-handbook)
-   - [The Interface](#31-the-interface)
+   - [Onboarding](#31-onboarding-the-welcome-mat)
    - [Core Workflow](#32-core-workflow)
-   - [Advanced Configuration](#33-advanced-configuration)
+   - [Advanced Configuration](#33-advanced-configuration-pensions--assumptions)
    - [Data Sovereignty](#34-data-sovereignty)
-4. [Installation & Deployment](#-installation--deployment)
-5. [Maintenance & Updates](#-maintenance--updates)
+4. [Technical Manual (Engineer's Codex)](#-technical-manual-engineers-codex)
+   - [Architecture](#41-architecture)
+   - [The Physics Update (Maintenance)](#42-the-physics-update-maintenance)
+5. [Installation & Deployment](#-installation--deployment)
 6. [Troubleshooting](#-troubleshooting)
 
 ---
@@ -39,109 +43,126 @@ Most FIRE (Financial Independence, Retire Early) calculators are **Stochastic** 
 
 ---
 
-## 🚀 Quick Start
+## ⚡ Features & Capabilities
 
-**Access the App:**
-[Link to your hosted GitHub Pages URL]
-
-**The Goal:**
-Find your **nFIRE Date** (The year you can stop working) and your **Coast Date** (The year you can stop saving).
+*   **Universal Solvency:** Supports **Service-Based Vesting** (GC, Military, Teachers). It dynamically calculates pension entitlement based on the specific retirement age being tested.
+*   **Physics of Decay:** Real-dollar simulation enforces **Inflation Erosion** on non-indexed income streams and applies **OAS Recovery Tax (Clawback)**.
+*   **Zero-Barrier UX:** Includes an automated "Welcome Mat" onboarding system and plain-English labeling.
+*   **Progressive Web App (PWA):** Installable on iOS/Android; works offline.
 
 ---
 
 ## 🕹️ User Manual (Pilot's Handbook)
 
-### 3.1 The Interface
-
-The application automatically adapts to your device:
-
-*   **Mobile:** A vertical scroll optimized for quick inputs.
-*   **Desktop:** A "Command Center" view.
-    *   **Left Panel:** Physics Controls (Income, Savings, Spend).
-    *   **Right Panel:** Telemetry (Real-time visualizations).
+### 3.1 Onboarding (The Welcome Mat)
+Upon first load, the **Welcome Mat** initializes. This heads-up display provides a high-level overview of the simulation controls. It creates a local storage flag (`nfire_welcome_seen`) to ensure it only appears once per device.
 
 ### 3.2 Core Workflow
 
-Follow this sequence to calibrate the engine:
+The application interface is divided into the **Control Panel** (Left/Top) and **Telemetry** (Right/Bottom).
 
-#### 1. Set the Zone 🇨🇦
+#### 1. Income & Location 🇨🇦
+*   **Province:** Select your tax residency (ON, AB, BC, NS).
+    *   *Why?* A retiree in Nova Scotia pays significantly more tax on RRSP withdrawals than one in British Columbia. The engine accounts for this exact "Tax Drag."
+*   **Annual Income:** Your pre-tax annual salary.
 
-Select your province (ON, AB, BC, NS).
-
-> **Why?** This loads specific provincial tax brackets. A retiree in Nova Scotia pays significantly more tax on RRSP withdrawals than one in British Columbia. The engine accounts for this exact "Tax Drag."
-
-#### 2. Calibrate Flows 💸
-
-*   **Gross Income:** Your pre-tax annual salary.
-*   **Injection (Savings):** How much you invest annually.
+#### 2. The Levers 💸
+*   **Annual Savings (Injection):** How much you invest annually.
     *   *Auto-Sort:* The engine automatically fills tax-sheltered accounts first (TFSA $\to$ RRSP $\to$ Non-Reg).
-*   **Burn Rate (Spend):** Your desired **after-tax** spending in retirement.
+*   **Retirement Spending (Burn Rate):** Your desired **after-tax** spending in retirement.
     *   *The Demand:* This is the net cash the engine must produce every year until age 95.
 
-#### 3. Input Assets 🏦
-
-Expand the **"Assets (Current)"** accordion and enter your current balances:
-
+#### 3. Assets (Current) 🏦
+Expand the accordion to enter current balances:
 *   **RRSP:** Registered Retirement Savings Plan.
 *   **TFSA:** Tax-Free Savings Account.
-*   **Non-Reg:** Taxable Investment Accounts.
+*   **Non-Reg:** Taxable Investment Accounts / Corp.
 
-#### 4. Read Telemetry 📡
-
-*   **The Reactor:** The radial gauge showing progress toward freedom.
+#### 4. Telemetry 📡
+*   **The Reactor:** A radial gauge showing progress toward freedom.
 *   **nFIRE Date:** The year you become fully solvent (work becomes optional).
 *   **Coast Ready:** The year you can stop *saving* money, assuming you continue to work just enough to cover your daily costs.
 
-### 3.3 Advanced Configuration
+### 3.3 Advanced Configuration (Pensions & Assumptions)
 
 #### 🛡️ Defined Benefit Pensions
+Click the **Shield Icon** to configure pensions. Supports two modes:
+1.  **Fixed Amount:** For private annuities. Enter annual amount and start age.
+2.  **Service Formula:** For Public Sector/GC. Enter **Career Start Age**, **Best 5-Year Avg**, and **Accrual Rate**.
+    *   *Logic:* The engine calculates the pension value dynamically based on the retirement age being tested in the solvency loop.
 
-If you have a government or corporate DB pension:
-
-1.  Click the **Shield Icon** in the console.
-2.  Toggle **Pension Plan** to ON.
-3.  Enter the **Annual Amount** and **Start Age**.
-    *   *Effect:* This reduces the portfolio size required to retire, often accelerating your Freedom Date by years.
-
-#### ⏱️ Timeline
-
-Open the **Clock** section to adjust:
-
-*   **Current Age:** The starting point (T=0).
-*   **Target Retirement Age:** The age accumulation stops and decumulation begins.
-
-#### 📈 Assumptions (The Trend)
-
-Open the **Graph** section to tweak global variables:
-
-*   **Real Growth Rate:** The investment return *minus* inflation. (Default: 5%).
-*   **Tax Drag:** The percentage of Non-Registered growth lost to tax annually.
+#### ⏱️ Timeline & Assumptions
+*   **Timeline:** Adjust Current Age and Target Retirement Age (for visual projection).
+*   **Assumptions:** Tweak **Real Growth Rate** (Default: 5%) and **Tax Drag**.
 
 ### 3.4 Data Sovereignty
-
 *   **Save:** Click the ⬇️ (Download) icon to save your profile as a `.json` file.
 *   **Load:** Click the ⬆️ (Upload) icon to restore a session.
 *   **Report:** Click the 📄 (Table) icon to export a CSV of your year-by-year net worth.
+*   **Reset:** Click the 🔄 (Refresh) icon to factory reset the simulation.
+
+---
+
+## 🛠️ Technical Manual (Engineer's Codex)
+
+### 4.1 Architecture
+The app is a "Static Stack" PWA built for longevity and security.
+*   **Framework:** React 18 + Vite.
+*   **State Management:** Zustand + Dexie (IndexedDB) for persistence.
+*   **Logic Core:** `src/engine/simulation.js`. Contains the solvency loop and tax calculation logic.
+*   **UI:** TailwindCSS + Mantine + Framer Motion.
+
+### 4.2 The Physics Update (Maintenance)
+**Frequency:** Annual (January)
+**File:** `src/data/rules_2025.json`
+
+nFIRE uses **Real Dollars** (Inflation-Adjusted). The 2025 tax rules act as a valid mathematical proxy for future years. However, to update precision:
+
+1.  **Source Data:** Search for updated "Federal/Provincial Tax Brackets" and "TFSA Limits".
+2.  **Update Constants:**
+    ```json
+    "constants": {
+      "rrsp_limit_pct": 0.18,
+      "rrsp_max_dollar": 32490, 
+      "tfsa_limit": 7000
+    }
+    ```
+3.  **Update Brackets:** Edit the `threshold` values in the `federal` and `provinces` objects.
 
 ---
 
 ## 💻 Installation & Deployment
 
-If you wish to host this yourself or modify the code:
-
 ### Prerequisites
-
 *   Node.js (v18+)
 
-### Commands
-
+### Local Development
 ```bash
 # 1. Install Dependencies
 npm install
 
-# 2. Run Local Development Server
+# 2. Run Local Server
 npm run dev
 
 # 3. Build for Production (Creates /dist folder)
 npm run build
 ```
+
+### Deployment
+Upload the contents of the `/dist` folder to any static host (GitHub Pages, Netlify, Vercel, S3). No backend or database is required.
+
+---
+
+## 🔮 Troubleshooting
+
+| Symptom | Probable Cause | Solution |
+| :--- | :--- | :--- |
+| **"Insolvency Detected"** | Assets hit $0 before Age 95. | Increase savings, reduce spend, or enable Pension. |
+| **"NEVER" displayed** | Net Worth is 0 and Spend > Income. | Save at least $1 to initialize the projection. |
+| **"Trajectory Error"** | Infinite Horizon calculation failed. | Ensure growth rate is realistic (1-10%). |
+| **Chart is Flat** | Scale issue. | Hover over the chart; the Y-axis auto-scales to your wealth. |
+| **Import Failed** | Corrupt JSON. | Ensure you are loading a file generated by nFIRE. |
+
+---
+
+**[END OF FILE]**
