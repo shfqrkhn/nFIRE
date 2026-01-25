@@ -11,7 +11,7 @@
 
 [**Live Demo**](https://shfqrkhn.github.io/nFIRE/)
 
-![Screenshot](https://raw.githubusercontent.com/shfqrkhn/nFIRE/refs/heads/main/%7BACC736FF-639E-4E05-97B9-0754025950F0%7D.png)
+![Screenshot](./screenshot-main.png)
 
 ---
 
