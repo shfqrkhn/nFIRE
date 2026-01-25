@@ -5,3 +5,11 @@
 ## 2026-01-25 - Sentinel - External Dependency Audit
 **Insight:** External fonts (Google Fonts) violated "Via Negativa" privacy and "offline-first" principles, creating a tracking vector and blocking render.
 **Protocol:** Remove external dependencies even if it causes minor visual regression, prioritizing privacy and performance over aesthetic polish in artifact-only environments where local replacement is difficult.
+
+## 2026-01-25 - Bolt - Orphaned Artifact Cleanup
+**Insight:** Build process drift left 1.2MB of unused JS/CSS artifacts in production, inflating deployment size and confusing potential future audits.
+**Protocol:** Verify asset usage via  and  manifests before deletion; treat artifact removal as a primary performance optimization in source-missing environments.
+
+## 2026-01-25 - Bolt - Orphaned Artifact Cleanup
+**Insight:** Build process drift left 1.2MB of unused JS/CSS artifacts in production, inflating deployment size and confusing potential future audits.
+**Protocol:** Verify asset usage via reference checks in manifests before deletion; treat artifact removal as a primary performance optimization in source-missing environments.
