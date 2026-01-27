@@ -20,3 +20,7 @@
 ## 2026-01-27 - Palette - Accessible Loading State
 **Insight:** Loading state was purely visual and invisible to screen readers.
 **Protocol:** All loading/status indicators must carry `role="status"` and `aria-live="polite"` to ensure inclusivity.
+
+## 2026-01-27 - Palette - iOS Zoom Fix
+**Insight:** Rapid interaction on iOS triggers double-tap zoom, breaking app-like feel.
+**Protocol:** Apply `touch-action: manipulation` to all interactive elements globally via CSS in `index.html`.

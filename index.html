@@ -10,7 +10,13 @@
     <title>nFIRE</title>
     <script type="module" crossorigin src="./assets/index-F7z_Yzm8.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-BoPtPGWY.css">
-  <link rel="manifest" href="./manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="./registerSW.js"></script></head>
+  <link rel="manifest" href="./manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="./registerSW.js"></script>
+    <style>
+      button, a, input, [role="button"] {
+        touch-action: manipulation;
+      }
+    </style>
+  </head>
   <body style="background-color: #050505; margin: 0;">
     <div id="root">
       <div role="status" aria-live="polite" style="height: 100vh; width: 100vw; display: flex; align-items: center; justify-content: center; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; color: rgba(255, 255, 255, 0.5); font-size: 12px; letter-spacing: 1px;">
