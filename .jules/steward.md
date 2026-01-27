@@ -12,3 +12,7 @@
 ## 2026-01-26 - Sentinel - CSP Synchronization
 **Insight:** Client-side CSP (meta tag) drifted from server-side headers (_headers), creating a potential security gap if headers are stripped.
 **Protocol:** Enforce parity between _headers and index.html CSP meta tags, specifically base-uri and object-src, while excluding environment-specific directives like upgrade-insecure-requests.
+
+## 2026-01-27 - Palette - Critical Path Loading
+**Insight:** 1MB+ JS bundle caused significant blank screen time. React root was empty by default.
+**Protocol:** Embed critical-path loading state (HTML/CSS) directly in `#root` to bridge the network/parsing gap before hydration.
