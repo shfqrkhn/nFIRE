@@ -12,3 +12,19 @@
 ## 2026-01-26 - Sentinel - CSP Synchronization
 **Insight:** Client-side CSP (meta tag) drifted from server-side headers (_headers), creating a potential security gap if headers are stripped.
 **Protocol:** Enforce parity between _headers and index.html CSP meta tags, specifically base-uri and object-src, while excluding environment-specific directives like upgrade-insecure-requests.
+
+## 2026-01-27 - Palette - Critical Path Loading
+**Insight:** 1MB+ JS bundle caused significant blank screen time. React root was empty by default.
+**Protocol:** Embed critical-path loading state (HTML/CSS) directly in `#root` to bridge the network/parsing gap before hydration.
+
+## 2026-01-27 - Palette - Accessible Loading State
+**Insight:** Loading state was purely visual and invisible to screen readers.
+**Protocol:** All loading/status indicators must carry `role="status"` and `aria-live="polite"` to ensure inclusivity.
+
+## 2026-01-27 - Palette - iOS Zoom Fix
+**Insight:** Rapid interaction on iOS triggers double-tap zoom, breaking app-like feel.
+**Protocol:** Apply `touch-action: manipulation` to all interactive elements globally via CSS in `index.html`.
+
+## 2026-01-27 - Bolt - Diagnostic Simulation
+**Insight:** Comprehensive simulation (runtime diagnostics) confirmed stable hydration and zero network errors.
+**Protocol:** Version bumps must be synchronized across `index.html`, `README.md`, and `sw.js`.
