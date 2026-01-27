@@ -24,3 +24,7 @@
 ## 2026-01-27 - Palette - iOS Zoom Fix
 **Insight:** Rapid interaction on iOS triggers double-tap zoom, breaking app-like feel.
 **Protocol:** Apply `touch-action: manipulation` to all interactive elements globally via CSS in `index.html`.
+
+## 2026-01-27 - Bolt - Diagnostic Simulation
+**Insight:** Comprehensive simulation (runtime diagnostics) confirmed stable hydration and zero network errors.
+**Protocol:** Version bumps must be synchronized across `index.html`, `README.md`, and `sw.js`.
