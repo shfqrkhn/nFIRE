@@ -16,3 +16,7 @@
 ## 2026-01-27 - Palette - Critical Path Loading
 **Insight:** 1MB+ JS bundle caused significant blank screen time. React root was empty by default.
 **Protocol:** Embed critical-path loading state (HTML/CSS) directly in `#root` to bridge the network/parsing gap before hydration.
+
+## 2026-01-27 - Palette - Accessible Loading State
+**Insight:** Loading state was purely visual and invisible to screen readers.
+**Protocol:** All loading/status indicators must carry `role="status"` and `aria-live="polite"` to ensure inclusivity.
