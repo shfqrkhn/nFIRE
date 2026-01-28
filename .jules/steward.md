@@ -28,3 +28,7 @@
 ## 2026-01-27 - Bolt - Diagnostic Simulation
 **Insight:** Comprehensive simulation (runtime diagnostics) confirmed stable hydration and zero network errors.
 **Protocol:** Version bumps must be synchronized across `index.html`, `README.md`, and `sw.js`.
+
+## 2026-01-27 - Sentinel - Version Authority Protocol
+**Insight:** `package.json` is missing in this artifact-only repository.
+**Protocol:** The "Sync Mandate" is adjusted: Version Source of Truth is strictly `index.html` (embedded footer) and `README.md` (badges). `package.json` checks are skipped.
