@@ -32,3 +32,7 @@
 ## 2026-01-27 - Sentinel - Version Authority Protocol
 **Insight:** `package.json` is missing in this artifact-only repository.
 **Protocol:** The "Sync Mandate" is adjusted: Version Source of Truth is strictly `index.html` (embedded footer) and `README.md` (badges). `package.json` checks are skipped.
+
+## 2026-01-28 - Sentinel - Source Code Missing
+**Insight:** Repository contains only build artifacts; source code is absent.
+**Protocol:** Architectural fixes (e.g. tree-shaking, removing dist/ from git) are BLOCKED by missing source. Document this to prevent future churn.
