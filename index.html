@@ -2,10 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; base-uri 'self'; object-src 'none';">
-    <link rel="icon" type="image/png" href="./pwa-512x512.png" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-4SyNtU48wkcDRCfytmGzBaeP6n583sHqwXn+zsPaD8c=' 'sha256-lUJ4bPO8cO+B312++diOQIVgZnjiV9peIaMt1dk7reE='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; base-uri 'self'; object-src 'none';">
+    <link rel="icon" type="image/png" href="./pwa-512x512.png" /><link rel="apple-touch-icon" href="./pwa-512x512.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#050505" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="description" content="nFIRE: The Universal Solvency Engine" />
     <title>nFIRE</title>
     <meta property="og:type" content="website" />
@@ -16,13 +18,13 @@
     <meta name="twitter:image" content="./screenshot-main.png" />
     <script type="module" crossorigin src="./assets/index-F7z_Yzm8.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-BoPtPGWY.css">
-  <link rel="manifest" href="./manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="./registerSW.js"></script>
+  <link rel="manifest" href="./manifest.webmanifest"><script>if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('./sw.js', { scope: './' })})}</script>
     <style>
-      button, a, input, [role="button"] {
+      button, a, input, select, textarea, summary, [role="button"] {
         touch-action: manipulation;
       }
     </style>
-  </head>
+  <script>if(location.hostname!=='localhost'){const n=()=>{};console.log=n;console.warn=n;console.error=n;}</script></head>
   <body style="background-color: #050505; margin: 0;">
     <div id="root">
       <div role="status" aria-live="polite" style="height: 100vh; width: 100vw; display: flex; align-items: center; justify-content: center; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; color: rgba(255, 255, 255, 0.5); font-size: 12px; letter-spacing: 1px;">
@@ -30,6 +32,6 @@
       </div>
     </div>
 
-    <div style="position: fixed; bottom: 8px; right: 8px; font-family: monospace; font-size: 10px; color: rgba(255, 255, 255, 0.3); pointer-events: none; z-index: 9999;">v10.1.3</div>
+    <div style="position: fixed; bottom: 8px; right: 8px; font-family: monospace; font-size: 10px; color: rgba(255, 255, 255, 0.3); pointer-events: none; z-index: 9999;">v10.1.9</div>
   </body>
 </html>

@@ -1,5 +1,12 @@
 # Pareto Via Negativa Analysis: nFIRE
 ## Analysis Date: 2026-01-18
+## Status Update: 2026-01-28
+- **Issue 1 (Build Artifacts):** BLOCKED. Source code is missing from repository.
+- **Issue 2 (Fonts):** DONE.
+- **Issue 3 (Duplicates):** DONE.
+- **Issue 4 (PWA):** KEPT.
+- **Issue 5 (JS Size):** BLOCKED. Source code is missing.
+- **Issue 6 (Screenshot):** DONE.
 
 ## Executive Summary
 This analysis identifies opportunities to improve nFIRE by **removing** complexity rather than adding features. Following the Pareto Principle (80/20 rule) combined with Via Negativa (improvement through subtraction), this report highlights the 20% of changes that will eliminate 80% of maintenance burden, deployment complexity, and performance issues.
