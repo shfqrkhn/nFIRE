@@ -114,9 +114,9 @@ The app is a "Static Stack" PWA built for longevity and security.
 
 ### 4.2 The Physics Update (Maintenance)
 **Frequency:** Annual (January)
-**File:** `src/data/rules_2025.json`
+**File:** `src/data/rules_2025.json` (Source repository only)
 
-nFIRE uses **Real Dollars** (Inflation-Adjusted). The 2025 tax rules act as a valid mathematical proxy for future years. However, to update precision:
+nFIRE uses **Real Dollars** (Inflation-Adjusted). The 2025 tax rules act as a valid mathematical proxy for future years. However, to update precision, the source code must be modified and rebuilt.
 
 1.  **Source Data:** Search for updated "Federal/Provincial Tax Brackets" and "TFSA Limits".
 2.  **Update Constants:**
@@ -133,23 +133,21 @@ nFIRE uses **Real Dollars** (Inflation-Adjusted). The 2025 tax rules act as a va
 
 ## 💻 Installation & Deployment
 
-### Prerequisites
-*   Node.js (v18+)
+### Artifact-Only Repository
+This repository contains **compiled build artifacts only**. The source code is not included.
 
-### Local Development
+### Local Preview
+To test the application locally, serve the current directory with a static HTTP server:
+
 ```bash
-# 1. Install Dependencies
-npm install
-
-# 2. Run Local Server
-npm run dev
-
-# 3. Build for Production (Creates /dist folder)
-npm run build
+# Using Python 3
+python3 -m http.server 8000
 ```
 
+Then open `http://localhost:8000` in your browser.
+
 ### Deployment
-Upload the contents of the `/dist` folder to any static host (GitHub Pages, Netlify, Vercel, S3). No backend or database is required.
+The contents of this repository are ready for deployment to any static host (GitHub Pages, Netlify, Vercel, S3). No build step is required.
 
 ---
 
