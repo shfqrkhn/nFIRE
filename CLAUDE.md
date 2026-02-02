@@ -57,8 +57,8 @@ The original source (not in this repo) uses:
 - **Framework**: React 18 + Vite
 - **State Management**: Zustand + Dexie (IndexedDB)
 - **UI**: TailwindCSS + Mantine + Framer Motion
-- **Logic Core**: `src/engine/simulation.js` (solvency loop, tax calculations)
-- **Tax Rules**: `src/data/rules_2025.json`
+- **Logic Core**: Simulation Engine (Source Only)
+- **Tax Rules**: 2025 Rule Set (Source Only)
 
 ---
 
