@@ -114,7 +114,7 @@ The app is a "Static Stack" PWA built for longevity and security.
 
 ### 4.2 The Physics Update (Maintenance)
 **Frequency:** Annual (January)
-**File:** `src/data/rules_2025.json` (Source repository only)
+**File:** Rule Configuration (Source repository only)
 
 nFIRE uses **Real Dollars** (Inflation-Adjusted). The 2025 tax rules act as a valid mathematical proxy for future years. However, to update precision, the source code must be modified and rebuilt.
 
