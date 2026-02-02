@@ -67,8 +67,8 @@ The original source (not in this repo) uses:
 **Source of Truth**: `index.html` (embedded footer) and `README.md` (badges)
 
 No `package.json` exists in this artifact repository. Version sync must be manual:
-- `index.html`: Line containing `v10.1.9` in the footer div
-- `README.md`: Badge in header `Version-10.1.9`
+- `index.html`: Line containing `v10.1.10` in the footer div
+- `README.md`: Badge in header `Version-10.1.10`
 
 ---
 
@@ -192,6 +192,7 @@ From `.jules/steward.md`:
 3. **CSP Synchronization**: Keep `_headers` and `index.html` CSP in parity
 4. **Accessible Loading States**: Use `role="status"` and `aria-live="polite"`
 5. **Version Authority**: Source of truth is `index.html` footer and `README.md` badges
+6. **Documentation Entropy**: Avoid executable code blocks in documentation; use descriptive text to prevent drift
 
 ---
 
