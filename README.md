@@ -109,7 +109,7 @@ Click the **Shield Icon** to configure pensions. Supports two modes:
 The app is a "Static Stack" PWA built for longevity and security.
 *   **Framework:** React 18 + Vite.
 *   **State Management:** Zustand + Dexie (IndexedDB) for persistence.
-*   **Logic Core:** `src/engine/simulation.js`. Contains the solvency loop and tax calculation logic.
+*   **Logic Core:** The solvency loop and tax calculation logic (compiled in `assets/`). *Note: Source code is not included in this distribution artifact.*
 *   **UI:** TailwindCSS + Mantine + Framer Motion.
 
 ### 4.2 The Physics Update (Maintenance)
