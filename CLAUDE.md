@@ -192,6 +192,7 @@ From `.jules/steward.md`:
 3. **CSP Synchronization**: Keep `_headers` and `index.html` CSP in parity
 4. **Accessible Loading States**: Use `role="status"` and `aria-live="polite"`
 5. **Version Authority**: Source of truth is `index.html` footer and `README.md` badges
+6. **Documentation Entropy**: Avoid executable code blocks in documentation; use descriptive text to prevent drift
 
 ---
 
