@@ -36,3 +36,7 @@
 ## 2026-01-28 - Sentinel - Source Code Missing
 **Insight:** Repository contains only build artifacts; source code is absent.
 **Protocol:** Architectural fixes (e.g. tree-shaking, removing dist/ from git) are BLOCKED by missing source. Document this to prevent future churn.
+
+## 2026-01-29 - Palette - Documentation Entropy
+**Insight:** Code blocks in documentation for artifact-only repositories create a maintenance liability as they drift from the compiled reality.
+**Protocol:** Documentation should rely on descriptive text rather than executable code blocks in artifact-only environments to prevent misleading users.

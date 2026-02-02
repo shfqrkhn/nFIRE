@@ -119,14 +119,7 @@ The app is a "Static Stack" PWA built for longevity and security.
 nFIRE uses **Real Dollars** (Inflation-Adjusted). The 2025 tax rules act as a valid mathematical proxy for future years. However, to update precision, the source code must be modified and rebuilt.
 
 1.  **Source Data:** Search for updated "Federal/Provincial Tax Brackets" and "TFSA Limits".
-2.  **Update Constants:**
-    ```json
-    "constants": {
-      "rrsp_limit_pct": 0.18,
-      "rrsp_max_dollar": 32490, 
-      "tfsa_limit": 7000
-    }
-    ```
+2.  **Update Constants:** Update the `constants` object (specifically `rrsp_limit_pct`, `rrsp_max_dollar`, and `tfsa_limit`).
 3.  **Update Brackets:** Edit the `threshold` values in the `federal` and `provinces` objects.
 
 ---
@@ -137,12 +130,7 @@ nFIRE uses **Real Dollars** (Inflation-Adjusted). The 2025 tax rules act as a va
 This repository contains **compiled build artifacts only**. The source code is not included.
 
 ### Local Preview
-To test the application locally, serve the current directory with a static HTTP server:
-
-```bash
-# Using Python 3
-python3 -m http.server 8000
-```
+To test the application locally, serve the current directory with a static HTTP server (e.g., using Python's `http.server` module).
 
 Then open `http://localhost:8000` in your browser.
 
