@@ -40,3 +40,7 @@
 ## 2026-01-29 - Palette - Documentation Entropy
 **Insight:** Code blocks in documentation for artifact-only repositories create a maintenance liability as they drift from the compiled reality.
 **Protocol:** Documentation should rely on descriptive text rather than executable code blocks in artifact-only environments to prevent misleading users.
+
+## 2026-02-01 - Sentinel - Service Worker Integrity
+**Insight:** Modifying `index.html` (even for version bumps) changes its hash, which must be manually updated in `sw.js` to ensure the PWA updates correctly.
+**Protocol:** Any modification to precached files in an artifact-only repo requires recalculating the file's MD5 and patching `sw.js`.
