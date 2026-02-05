@@ -44,3 +44,7 @@
 ## 2026-02-01 - Sentinel - Service Worker Integrity
 **Insight:** Modifying `index.html` (even for version bumps) changes its hash, which must be manually updated in `sw.js` to ensure the PWA updates correctly.
 **Protocol:** Any modification to precached files in an artifact-only repo requires recalculating the file's MD5 and patching `sw.js`.
+
+## 2026-02-01 - Palette - Documentation Restoration
+**Insight:** Referenced architectural trackers (`PARETO_VIA_NEGATIVA_ANALYSIS.md`) that are missing create cognitive load and ambiguity.
+**Protocol:** If a referenced hygiene file is missing, its restoration (even if content is inferred) takes priority over new features to re-establish the "Source of Truth".
