@@ -48,3 +48,7 @@
 ## 2026-02-01 - Palette - Documentation Restoration
 **Insight:** Referenced architectural trackers (`PARETO_VIA_NEGATIVA_ANALYSIS.md`) that are missing create cognitive load and ambiguity.
 **Protocol:** If a referenced hygiene file is missing, its restoration (even if content is inferred) takes priority over new features to re-establish the "Source of Truth".
+
+## 2026-02-02 - Palette - Meta-Documentation Sync
+**Insight:** `CLAUDE.md` version reference drifted from the artifact version.
+**Protocol:** `CLAUDE.md` must be treated as a versioned artifact and synchronized with `index.html` during every release cycle.
