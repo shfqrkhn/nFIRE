@@ -2,7 +2,7 @@
 
 # 🌌 nFIRE: The Singularity Solvency Engine
 
-![Version](https://img.shields.io/badge/Version-10.1.13-neon)
+![Version](https://img.shields.io/badge/Version-10.1.14-neon)
 ![Status](https://img.shields.io/badge/Status-Universal-success)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 ![Privacy](https://img.shields.io/badge/Data-Local_Only-red)

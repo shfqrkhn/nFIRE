@@ -52,3 +52,7 @@
 ## 2026-02-02 - Palette - Meta-Documentation Sync
 **Insight:** `CLAUDE.md` version reference drifted from the artifact version.
 **Protocol:** `CLAUDE.md` must be treated as a versioned artifact and synchronized with `index.html` during every release cycle.
+
+## 2026-02-07 - Palette - Client-Side Routing Consistency
+**Insight:** `404.html` (the fallback for SPA routing on GitHub Pages) drifted from `index.html` (v10.1.12 vs v10.1.13), potentially serving stale content on subpaths.
+**Protocol:** `404.html` must be an exact copy of `index.html` and synchronized during every version bump.
