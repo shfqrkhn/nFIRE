@@ -25,15 +25,16 @@
       button, a, input, select, textarea, summary, [role="button"] {
         touch-action: manipulation;
       }
+      @keyframes pulse { 0% { opacity: 0.3; } 50% { opacity: 0.7; } 100% { opacity: 0.3; } }
     </style>
   <script>if(location.hostname!=='localhost'){const n=()=>{};console.log=n;console.warn=n;console.error=n;}</script></head>
   <body style="background-color: #050505; margin: 0;">
     <div id="root">
-      <div role="status" aria-live="polite" style="height: 100vh; width: 100vw; display: flex; align-items: center; justify-content: center; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; color: rgba(255, 255, 255, 0.5); font-size: 12px; letter-spacing: 1px;">
+      <div role="status" aria-live="polite" style="height: 100vh; width: 100vw; display: flex; align-items: center; justify-content: center; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; color: rgba(255, 255, 255, 0.5); font-size: 12px; letter-spacing: 1px; animation: pulse 1.5s infinite ease-in-out;">
         nFIRE :: SYSTEM LOADING
       </div>
     </div>
 
-    <div style="position: fixed; bottom: 8px; right: 8px; font-family: monospace; font-size: 10px; color: rgba(255, 255, 255, 0.3); pointer-events: none; z-index: 9999;">v10.1.14</div>
+    <div style="position: fixed; bottom: 8px; right: 8px; font-family: monospace; font-size: 10px; color: rgba(255, 255, 255, 0.3); pointer-events: none; z-index: 9999;">v10.1.15</div>
   </body>
 </html>
