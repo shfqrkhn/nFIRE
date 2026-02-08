@@ -56,3 +56,7 @@
 ## 2026-02-07 - Palette - Client-Side Routing Consistency
 **Insight:** `404.html` (the fallback for SPA routing on GitHub Pages) drifted from `index.html` (v10.1.12 vs v10.1.13), potentially serving stale content on subpaths.
 **Protocol:** `404.html` must be an exact copy of `index.html` and synchronized during every version bump.
+
+## 2026-02-08 - Palette - Loading State Enhancement
+**Insight:** Static loading text lacked liveliness and reassurance.
+**Protocol:** Implement subtle CSS animations for loading states to improve perceived performance without adding asset weight.
