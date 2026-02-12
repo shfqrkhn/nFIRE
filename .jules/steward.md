@@ -60,3 +60,7 @@
 ## 2026-02-08 - Palette - Loading State Enhancement
 **Insight:** Static loading text lacked liveliness and reassurance.
 **Protocol:** Implement subtle CSS animations for loading states to improve perceived performance without adding asset weight.
+
+## 2026-02-12 - Palette - PWA Metadata & Caching
+**Insight:** iOS PWA experience was degraded (generic title) and SPA routing on GitHub Pages risked stale content due to default caching on 404.html.
+**Protocol:** Explicitly define `apple-mobile-web-app-title` in HTML and `Cache-Control: public, max-age=0` for `404.html` in `_headers` to ensure consistent app-like behavior and fresh routing.
