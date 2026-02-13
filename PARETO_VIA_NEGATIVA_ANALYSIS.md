@@ -24,3 +24,4 @@
 | PWA overhead | `KEPT` | Provides offline capability. |
 | Screenshot naming | `DONE` | Renamed to descriptive name. |
 | **Documentation Entropy** | `DONE` | Restored missing `PARETO_VIA_NEGATIVA_ANALYSIS.md`. |
+| **Favicon optimization** | `DONE` | Reduced from 101KB to <2KB. |
