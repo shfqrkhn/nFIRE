@@ -28,7 +28,7 @@
             "form_factor": "wide"
         }
     ],
-    "description": "nFIRE: The Universal Solvency Engine",
+    "description": "nFIRE is a deterministic financial independence engine for Canadians, simulating tax brackets, RRSP meltdowns, and pensions.",
     "categories": [
         "finance",
         "productivity",
