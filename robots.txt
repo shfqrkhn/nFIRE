@@ -1,2 +1,6 @@
 User-agent: *
-Allow: /
+Disallow: /.jules/
+Disallow: /CLAUDE.md
+Disallow: /PARETO_VIA_NEGATIVA_ANALYSIS.md
+Disallow: /README.md
+Disallow: /LICENSE
