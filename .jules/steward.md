@@ -64,3 +64,7 @@
 ## 2026-02-12 - Palette - PWA Metadata & Caching
 **Insight:** iOS PWA experience was degraded (generic title) and SPA routing on GitHub Pages risked stale content due to default caching on 404.html.
 **Protocol:** Explicitly define `apple-mobile-web-app-title` in HTML and `Cache-Control: public, max-age=0` for `404.html` in `_headers` to ensure consistent app-like behavior and fresh routing.
+
+## 2026-02-15 - Palette - Artifact Hygiene
+**Insight:** Accumulation of verification artifacts (e.g., screenshots) pollutes the repository and increases clone size.
+**Protocol:** All verification artifacts must be purged immediately after use to maintain "Law of the Razor".
