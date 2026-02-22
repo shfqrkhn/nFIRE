@@ -4,7 +4,7 @@
 
 **nFIRE** (The Singularity Solvency Engine) is a deterministic financial independence calculator designed for Canadian users. It simulates financial life year-by-year, enforcing Canadian progressive tax brackets, RRSP meltdowns, and Defined Benefit pension calculations.
 
-- **Version**: 10.1.26
+- **Version**: 10.1.27
 - **License**: MIT
 - **Live Demo**: https://shfqrkhn.github.io/nFIRE/
 - **Privacy**: All data stored locally (no server communication)
@@ -222,4 +222,4 @@ diff <(grep "Content-Security-Policy" _headers) <(grep "Content-Security-Policy"
 
 ---
 
-*Last updated: 2026-02-21 | Version: 10.1.26*
+*Last updated: 2026-02-22 | Version: 10.1.27*
