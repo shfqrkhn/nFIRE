@@ -67,8 +67,8 @@ The original source (not in this repo) uses:
 **Source of Truth**: `index.html` (embedded footer) and `README.md` (badges)
 
 No `package.json` exists in this artifact repository. Version sync must be manual:
-- `index.html`: Line containing `v10.1.26` in the footer div
-- `README.md`: Badge in header `Version-10.1.26`
+- `index.html`: Line containing `v10.1.28` in the footer div
+- `README.md`: Badge in header `Version-10.1.28`
 
 ---
 
