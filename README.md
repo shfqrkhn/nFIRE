@@ -1,11 +1,11 @@
 # 🌌 nFIRE: The Singularity Solvency Engine
 
-![Version](https://img.shields.io/badge/Version-10.1.29-neon)
+![Version](https://img.shields.io/badge/Version-10.1.30-neon)
 ![Status](https://img.shields.io/badge/Status-Universal-success)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 ![Privacy](https://img.shields.io/badge/Data-Local_Only-red)
 
-> **nFIRE** is a deterministic financial independence engine. Unlike simple calculators that rely on the "4% Rule," nFIRE simulates your financial life year-by-year, strictly enforcing Canadian progressive tax brackets, RRSP meltdown strategies, and complex Defined Benefit pension vesting to determine your absolute solvency.
+> **nFIRE** is a deterministic financial independence engine. Unlike simple calculators that rely on the "4% Rule," nFIRE simulates your financial life year-by-year, strictly enforcing Canadian progressive tax brackets, RRSP meltdowns, and complex Defined Benefit pension vesting to determine your absolute solvency.
 
 [**Live Demo**](https://shfqrkhn.github.io/nFIRE/)
 
