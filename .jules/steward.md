@@ -68,3 +68,7 @@
 ## 2026-02-15 - Palette - Artifact Hygiene
 **Insight:** Accumulation of verification artifacts (e.g., screenshots) pollutes the repository and increases clone size.
 **Protocol:** All verification artifacts must be purged immediately after use to maintain "Law of the Razor".
+
+## 2026-02-28 - Palette - SVG Accessibility Injection
+**Insight:** Compiled React bundles lack `alt` or `aria` attributes on SVGs, causing screen reader noise. Modifying the bundle is forbidden.
+**Protocol:** Inject a MutationObserver script in `index.html` to dynamically apply `aria-hidden="true"` and `focusable="false"` to decorative SVGs at runtime, bridging the accessibility gap without breaking the artifact architecture.
