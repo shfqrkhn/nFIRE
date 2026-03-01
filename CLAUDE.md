@@ -4,7 +4,7 @@
 
 **nFIRE** (The Singularity Solvency Engine) is a deterministic financial independence calculator designed for Canadian users. It simulates financial life year-by-year, enforcing Canadian progressive tax brackets, RRSP meltdowns, and Defined Benefit pension calculations.
 
-- **Version**: 10.1.31
+- **Version**: 10.1.33
 - **License**: MIT
 - **Live Demo**: https://shfqrkhn.github.io/nFIRE/
 - **Privacy**: All data stored locally (no server communication)
@@ -30,24 +30,7 @@ The source code (React/Vite project) is maintained separately. This repository s
 
 ## Repository Structure
 
-```
-nFIRE/
-├── index.html              # Main entry point (version badge embedded)
-├── assets/
-│   ├── index-F7z_Yzm8.js   # Compiled React application (~1MB)
-│   └── index-BoPtPGWY.css  # Compiled TailwindCSS styles
-├── manifest.webmanifest    # PWA manifest
-├── sw.js                   # Service Worker (Workbox-based)
-├── workbox-66610c77.js     # Workbox library
-├── _headers                # HTTP security headers (Cloudflare/Netlify)
-├── pwa-512x512.png         # App icon
-├── screenshot-main.png     # README screenshot
-├── README.md               # User documentation
-├── PARETO_VIA_NEGATIVA_ANALYSIS.md  # Optimization analysis
-├── LICENSE                 # MIT License
-└── .jules/
-    └── steward.md          # AI assistant protocols/learnings
-```
+The `nFIRE` directory contains the main entry point `index.html`, along with compiled application assets (`assets/` directory with JS and CSS). It also includes the PWA manifest `manifest.webmanifest`, the Service Worker `sw.js` built with Workbox, HTTP security headers configured in `_headers`, application icons, screenshots, and various documentation files including `README.md`, `CLAUDE.md`, and an optimization analysis log `PARETO_VIA_NEGATIVA_ANALYSIS.md`. Additionally, an AI assistant protocol file is located in `.jules/steward.md`.
 
 ---
 
@@ -67,8 +50,8 @@ The original source (not in this repo) uses:
 **Source of Truth**: `index.html` (embedded footer) and `README.md` (badges)
 
 No `package.json` exists in this artifact repository. Version sync must be manual:
-- `index.html`: Line containing `v10.1.32` in the footer div
-- `README.md`: Badge in header `Version-10.1.31`
+- `index.html`: Line containing `v10.1.33` in the footer div
+- `README.md`: Badge in header `Version-10.1.33`
 
 ---
 
@@ -82,18 +65,7 @@ Enforced in two locations (must stay synchronized):
 2. **`_headers`** - HTTP headers (server-side)
 
 Current policy:
-```
-default-src 'self';
-script-src 'self' 'sha256-...' 'sha256-...';
-style-src 'self' 'unsafe-inline';
-font-src 'self';
-img-src 'self' data:;
-connect-src 'self';
-worker-src 'self';
-manifest-src 'self';
-base-uri 'self';
-object-src 'none';
-```
+The default source is restricted to 'self', with scripts allowed from 'self' and specific SHA-256 hashes for inline scripts. Styles are allowed from 'self' and 'unsafe-inline', while fonts, images (including data URIs), connections, workers, manifests, and the base URI are restricted to 'self'. Object sources and frame ancestors are set to 'none', and form actions are restricted to 'self'.
 
 ### HTTP Headers (`_headers`)
 
@@ -198,19 +170,7 @@ From `.jules/steward.md`:
 
 ## Useful Commands
 
-```bash
-# View repository structure
-ls -la
-
-# Check current version
-grep -r "v10" index.html README.md
-
-# Validate JSON files
-cat manifest.webmanifest | python -m json.tool
-
-# Check for CSP mismatches
-diff <(grep "Content-Security-Policy" _headers) <(grep "Content-Security-Policy" index.html)
-```
+To view the repository structure, list all files including hidden ones. To check the current version, search for "v10" recursively across `index.html` and `README.md`. To validate the PWA manifest JSON format, use Python's built-in `json.tool`. Finally, to check for CSP mismatches between client-side and server-side configurations, compare the `Content-Security-Policy` lines from `_headers` and `index.html`.
 
 ---
 
@@ -222,4 +182,4 @@ diff <(grep "Content-Security-Policy" _headers) <(grep "Content-Security-Policy"
 
 ---
 
-*Last updated: 2026-02-26 | Version: 10.1.32*
+*Last updated: 2026-03-01 | Version: 10.1.33*
