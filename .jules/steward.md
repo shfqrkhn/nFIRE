@@ -72,3 +72,7 @@
 ## 2026-02-28 - Palette - SVG Accessibility Injection
 **Insight:** Compiled React bundles lack `alt` or `aria` attributes on SVGs, causing screen reader noise. Modifying the bundle is forbidden.
 **Protocol:** Inject a MutationObserver script in `index.html` to dynamically apply `aria-hidden="true"` and `focusable="false"` to decorative SVGs at runtime, bridging the accessibility gap without breaking the artifact architecture.
+
+## 2026-03-02 - Palette - Maskable Icon Padding
+**Insight:** Android PWA icons (maskable icons) require specific padding to prevent cropping. `pwa-192x192.png` lacked necessary padding.
+**Protocol:** When generating `pwa-192x192.png` from `pwa-512x512.png`, ensure 20% padding is applied to meet maskable icon safe zone requirements.
