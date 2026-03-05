@@ -1,7 +1,5 @@
 User-agent: *
 Disallow: /.jules/
-Disallow: /CLAUDE.md
-Disallow: /PARETO_VIA_NEGATIVA_ANALYSIS.md
-Disallow: /README.md
+Disallow: /*.md
 Disallow: /LICENSE
 Sitemap: https://shfqrkhn.github.io/nFIRE/sitemap.xml
