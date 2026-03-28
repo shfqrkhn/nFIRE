@@ -1,6 +1,6 @@
 # 🌌 nFIRE: The Singularity Solvency Engine
 
-![Version](https://img.shields.io/badge/Version-10.1.35-neon)
+![Version](https://img.shields.io/badge/Version-10.1.37-neon)
 ![Status](https://img.shields.io/badge/Status-Universal-success)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 ![Privacy](https://img.shields.io/badge/Data-Local_Only-red)
@@ -131,6 +131,9 @@ This repository contains **compiled build artifacts only**. The source code is n
 To test the application locally, serve the current directory with a static HTTP server (e.g., using Python's `http.server` module).
 
 Then open `http://localhost:8000` in your browser.
+
+### Integrity Check
+Run `./scripts/verify_artifact_consistency.sh` to verify version sync and baseline security/mobile invariants across deployment artifacts.
 
 ### Deployment
 The contents of this repository are ready for deployment to any static host (GitHub Pages, Netlify, Vercel, S3). No build step is required.
