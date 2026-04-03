@@ -17,8 +17,11 @@
 .
 ├── .jules/
 │   └── steward.md
+├── scripts/
+│   └── verify_artifact_consistency.sh
 ├── 404.html
 ├── CLAUDE.md
+├── CODEBASE.md
 ├── LICENSE
 ├── PARETO_VIA_NEGATIVA_ANALYSIS.md
 ├── README.md
@@ -27,9 +30,14 @@
 ├── assets/
 │   ├── index-*.css
 │   └── index-*.js
+├── favicon.ico
 ├── index.html
 ├── manifest.webmanifest
+├── pwa-180x180.png
+├── pwa-192x192.png
+├── pwa-512x512.png
 ├── robots.txt
+├── screenshot-main.png
 ├── sitemap.xml
 ├── sw.js
 └── workbox-*.js
@@ -39,7 +47,7 @@
 - **Core Flows:** Initial load via `index.html` featuring inline CSS loading states. Service worker (`sw.js`) subsequently caches all static assets for offline capability. SPA routing is managed via `404.html` (GitHub Pages) and `_redirects` (Netlify).
 - **Important Interfaces:** The Service Worker precache manifest (`sw.js`) defines exact file hashes. Client-side inline JS implements accessibility fixes for SVGs using a `MutationObserver`.
 - **Key Configs:** `_headers` (strict HTTP security headers, CSP, caching rules), `manifest.webmanifest` (PWA display parameters, icons).
-- **Major Invariants:** Version parity is strictly required across `index.html`, `README.md`, and `CLAUDE.md`. The `404.html` must remain an exact clone of `index.html`.
+- **Major Invariants:** Version parity is strictly required across `index.html`, `README.md`, `CLAUDE.md`, and `404.html`. The `404.html` must remain an exact clone of `index.html`. Security headers in `_headers` must match meta tags in HTML.
 - **Principal Risks:** PWA cache invalidation failure due to manual hash updates in `sw.js` when modifying precached files. Missing source code fundamentally limits the ability to patch or audit complex business logic.
 
 ## File Inventory
@@ -49,12 +57,13 @@
 | `sw.js` | Service Worker | Critical | Full | PWA caching logic and precache manifest routing. |
 | `_headers` | HTTP Security | Critical | Full | Server-side security configs, CSP parity, strict cache policies. |
 | `manifest.webmanifest` | PWA Config | Important | Full | Manifest details, layout and icon configs. |
+| `scripts/verify_artifact_consistency.sh` | CI Script | Critical | Full | Enforces version and security invariant validation. |
 | `README.md` | Project Doc | Context | Excerpt | Core documentation, version badges, architecture details. |
+| `CLAUDE.md` | AI Guidelines | Important | Excerpt | Artifact constraints and AI developer guidelines. |
 | `robots.txt` | SEO/Access | Context | Full | Crawler rules and sitemap definition. |
 | `404.html` | SPA Routing | Important | Summary | Exact copy of `index.html` for GitHub Pages SPA routing fallback. |
-| `CLAUDE.md` | AI Guidelines | Important | Summary | Artifact constraints and AI developer guidelines. |
-| `PARETO_VIA_NEGATIVA_ANALYSIS.md` | Arch Tracking | Context | Summary | Design philosophies and artifact architectural rules. |
-| `.jules/steward.md` | Dev Ledger | Context | Summary | Historical developer logs and rules. |
+| `PARETO_VIA_NEGATIVA_ANALYSIS.md` | Arch Tracking | Context | Excerpt | Design philosophies and artifact architectural rules. |
+| `.jules/steward.md` | Dev Ledger | Context | Excerpt | Historical developer logs and rules. |
 | `sitemap.xml` | SEO | Context | Summary | Canonical URLs and update frequency. |
 | `_redirects` | SPA Routing | Context | Summary | Single-line SPA fallback config. |
 | `assets/*.js` | Build Artifact | Context | Excluded | Minified React logic core. Excluded due to missing source code. |
@@ -62,6 +71,7 @@
 | `workbox-*.js` | Dependency | Context | Excluded | Third-party Workbox library. |
 | `*.png`, `*.ico` | Assets | Context | Excluded | Static image files. |
 | `LICENSE` | Legal | Context | Excluded | Standard MIT License. |
+| `CODEBASE.md` | Self | Context | Excluded | The artifact itself. |
 
 ## Embedded Critical Files
 
@@ -74,7 +84,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-te72nCdQZcQNdKiok7rhEkNIMak1nM/vBg9mjPk2v6w=' 'sha256-4SyNtU48wkcDRCfytmGzBaeP6n583sHqwXn+zsPaD8c=' 'sha256-lUJ4bPO8cO+B312++diOQIVgZnjiV9peIaMt1dk7reE='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-te72nCdQZcQNdKiok7rhEkNIMak1nM/vBg9mjPk2v6w=' 'sha256-4SyNtU48wkcDRCfytmGzBaeP6n583sHqwXn+zsPaD8c=' 'sha256-lUJ4bPO8cO+B312++diOQIVgZnjiV9peIaMt1dk7reE='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests;">
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="icon" type="image/png" href="./pwa-512x512.png" /><link rel="icon" href="./favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="./pwa-180x180.png" sizes="180x180" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -111,7 +121,7 @@
       </div>
     </div>
 
-    <div style="position: fixed; bottom: 8px; right: 8px; font-family: monospace; font-size: 10px; color: rgba(255, 255, 255, 0.3); pointer-events: none; z-index: 9999;">v10.1.35</div>
+    <div style="position: fixed; bottom: 8px; right: 8px; font-family: monospace; font-size: 10px; color: rgba(255, 255, 255, 0.3); pointer-events: none; z-index: 9999;">v10.1.39</div>
   </body>
 </html>
 ```
@@ -121,8 +131,7 @@
 - **Why it matters:** Workbox implementation governing offline availability and caching strategy. Contains hardcoded precache revision hashes that must be kept exactly synchronized with file content.
 - **Inclusion Mode:** Full
 ```javascript
-if(!self.define){let e,i={};const n=(n,s)=>(n=new URL(n+".js",s).href,i[n]||new Promise(i=>{if("document"in self){const e=document.createElement("script");e.src=n,e.onload=i,document.head.appendChild(e)}else e=n,importScripts(n),i()}).then(()=>{let e=i[n];if(!e)throw new Error(`Module ${n} didn’t register its module`);return e}));self.define=(s,c)=>{const r=e||("document"in self?document.currentScript.src:"")||location.href;if(i[r])return;let o={};const t=e=>n(e,r),a={module:{uri:r},exports:o,require:t};i[r]=Promise.all(s.map(e=>a[e]||t(e))).then(e=>(c(...e),o))}}define(["./workbox-66610c77"],function(e){"use strict";self.skipWaiting(),e.clientsClaim(),e.precacheAndRoute([{url:"index.html",revision:"739fa89bffb7c7c3f2ece9087e183365"},{url:"manifest.webmanifest",revision:"fe5224ed222c03439abdcad5bd91b5a4"},{url:"pwa-192x192.png",revision:"3177d553168bf4a7cd01b9a1520b2faf"},{url:"pwa-180x180.png",revision:"38220b218afd1b65a9ca529d29952cc4"},{url:"pwa-512x512.png",revision:"99ea437b0205dc213a787c22fec2ac67"},{url:"assets/index-BoPtPGWY.css",revision:null},{url:"assets/index-F7z_Yzm8.js",revision:null}],{}),e.cleanupOutdatedCaches(),e.registerRoute(new e.NavigationRoute(e.createHandlerBoundToURL("index.html")))});
-
+if(!self.define){let e,i={};const n=(n,s)=>(n=new URL(n+".js",s).href,i[n]||new Promise(i=>{if("document"in self){const e=document.createElement("script");e.src=n,e.onload=i,document.head.appendChild(e)}else e=n,importScripts(n),i()}).then(()=>{let e=i[n];if(!e)throw new Error(`Module ${n} didn’t register its module`);return e}));self.define=(s,c)=>{const r=e||("document"in self?document.currentScript.src:"")||location.href;if(i[r])return;let o={};const t=e=>n(e,r),a={module:{uri:r},exports:o,require:t};i[r]=Promise.all(s.map(e=>a[e]||t(e))).then(e=>(c(...e),o))}}define(["./workbox-66610c77"],function(e){"use strict";self.skipWaiting(),e.clientsClaim(),e.precacheAndRoute([{url:"index.html",revision:"4e665327e8986a4697b1e2b171604295"},{url:"manifest.webmanifest",revision:"fe5224ed222c03439abdcad5bd91b5a4"},{url:"pwa-192x192.png",revision:"03dec2455ca45f4d5e9eaf41f3915c4f"},{url:"pwa-180x180.png",revision:"38220b218afd1b65a9ca529d29952cc4"},{url:"pwa-512x512.png",revision:"99ea437b0205dc213a787c22fec2ac67"},{url:"assets/index-BoPtPGWY.css",revision:null},{url:"assets/index-F7z_Yzm8.js",revision:null}],{}),e.cleanupOutdatedCaches(),e.registerRoute(new e.NavigationRoute(e.createHandlerBoundToURL("index.html")))});
 ```
 
 ### `_headers`
@@ -139,6 +148,8 @@ if(!self.define){let e,i={};const n=(n,s)=>(n=new URL(n+".js",s).href,i[n]||new 
   Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-te72nCdQZcQNdKiok7rhEkNIMak1nM/vBg9mjPk2v6w=' 'sha256-4SyNtU48wkcDRCfytmGzBaeP6n583sHqwXn+zsPaD8c=' 'sha256-lUJ4bPO8cO+B312++diOQIVgZnjiV9peIaMt1dk7reE='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests;
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Embedder-Policy: require-corp
+  Cross-Origin-Resource-Policy: same-origin
+  Origin-Agent-Cluster: ?1
 
 /index.html
   Cache-Control: public, max-age=0, must-revalidate
@@ -166,7 +177,6 @@ if(!self.define){let e,i={};const n=(n,s)=>(n=new URL(n+".js",s).href,i[n]||new 
 
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
-
 ```
 
 ### `manifest.webmanifest`
@@ -211,7 +221,45 @@ if(!self.define){let e,i={};const n=(n,s)=>(n=new URL(n+".js",s).href,i[n]||new 
         "utilities"
     ]
 }
+```
 
+### `scripts/verify_artifact_consistency.sh`
+- **Role:** Validation Script
+- **Why it matters:** Checks version invariants across multiple files and confirms security string presences.
+- **Inclusion Mode:** Full
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+readme_version=$(sed -n 's|.*Version-\([0-9]\+\.[0-9]\+\.[0-9]\+\)-neon.*|\1|p' README.md)
+index_version=$(sed -n 's|.*>v\([0-9]\+\.[0-9]\+\.[0-9]\+\)</div>|\1|p' index.html)
+notfound_version=$(sed -n 's|.*>v\([0-9]\+\.[0-9]\+\.[0-9]\+\)</div>|\1|p' 404.html)
+
+[[ -n "$readme_version" && -n "$index_version" && -n "$notfound_version" ]]
+[[ "$readme_version" == "$index_version" && "$index_version" == "$notfound_version" ]]
+
+for file in index.html 404.html; do
+  grep -q "upgrade-insecure-requests" "$file"
+  grep -q "touch-action: manipulation" "$file"
+done
+
+grep -q "upgrade-insecure-requests" _headers
+grep -q "Cross-Origin-Resource-Policy: same-origin" _headers
+grep -q "Origin-Agent-Cluster: ?1" _headers
+
+echo "OK: artifact security/version invariants are consistent (v${readme_version})."
+```
+
+### `robots.txt`
+- **Role:** Crawler configuration
+- **Why it matters:** Demonstrates strict disallow constraints on markdown documentation and hidden folders while pointing to the sitemap.
+- **Inclusion Mode:** Full
+```text
+User-agent: *
+Disallow: /.jules/
+Disallow: /*.md
+Disallow: /LICENSE
+Sitemap: https://shfqrkhn.github.io/nFIRE/sitemap.xml
 ```
 
 ### `README.md`
@@ -222,7 +270,7 @@ if(!self.define){let e,i={};const n=(n,s)=>(n=new URL(n+".js",s).href,i[n]||new 
 ```markdown
 # 🌌 nFIRE: The Singularity Solvency Engine
 
-![Version](https://img.shields.io/badge/Version-10.1.35-neon)
+![Version](https://img.shields.io/badge/Version-10.1.39-neon)
 ![Status](https://img.shields.io/badge/Status-Universal-success)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 ![Privacy](https://img.shields.io/badge/Data-Local_Only-red)
@@ -240,12 +288,7 @@ if(!self.define){let e,i={};const n=(n,s)=>(n=new URL(n+".js",s).href,i[n]||new 
 1. [The Philosophy](#-the-philosophy)
 2. [Features & Capabilities](#-features--capabilities)
 3. [User Manual (Pilot's Handbook)](#-user-manual-pilots-handbook)
-   - [Onboarding](#31-onboarding-the-welcome-mat)
-   - [Core Workflow](#32-core-workflow)
-   - [Advanced Configuration](#33-advanced-configuration-pensions--assumptions)
 ...
-
-*   **Annual Savings (Injection):** How much you invest annually.
     *   *Auto-Sort:* The engine automatically fills tax-sheltered accounts first (TFSA $\to$ RRSP $\to$ Non-Reg).
 *   **Retirement Spending (Burn Rate):** Your desired **after-tax** spending in retirement.
     *   *The Demand:* This is the net cash the engine must produce every year until age 95.
@@ -264,43 +307,97 @@ Expand the accordion to enter current balances:
 ### 3.3 Advanced Configuration (Pensions & Assumptions)
 
 #### 🛡️ Defined Benefit Pensions
-Click the **Shield Icon** to configure pensions. Supports two modes:
-1.  **Fixed Amount:** For private annuities. Enter annual amount and start age.
-2.  **Service Formula:** For Public Sector/GC. Enter **Career Start Age**, **Best 5-Year Avg**, and **Accrual Rate**.
-    *   *Logic:* The engine calculates the pension value dynamically based on the retirement age being tested in the solvency loop.
-
-#### ⏱️ Timeline & Assumptions
-*   **Timeline:** Adjust Current Age and Target Retirement Age (for visual projection).
-*   **Assumptions:** Tweak **Real Growth Rate** (Default: 5%) and **Tax Drag**.
-
 ...
 ```
 
-### `robots.txt`
-- **Role:** Crawler configuration
-- **Why it matters:** Demonstrates strict disallow constraints on markdown documentation and hidden folders while pointing to the sitemap.
-- **Inclusion Mode:** Full
-```text
-User-agent: *
-Disallow: /.jules/
-Disallow: /*.md
-Disallow: /LICENSE
-Sitemap: https://shfqrkhn.github.io/nFIRE/sitemap.xml
+### `CLAUDE.md`
+- **Role:** AI Guidelines
+- **Why it matters:** Artifact constraints and AI developer guidelines, explaining the missing source code and update paths.
+- **Inclusion Mode:** Excerpt
+- **Covered Region:** Important sections detailing Critical Constraints and Technology Stack.
+```markdown
 
+**This repository contains ONLY build artifacts, NOT source code.**
+
+The source code (React/Vite project) is maintained separately. This repository serves as the deployment target for GitHub Pages.
+
+### Implications for AI Assistants:
+
+1. **DO NOT** attempt to modify JavaScript bundles (`assets/*.js`) - they are minified/compiled
+2. **DO NOT** attempt to add new features requiring JS changes - source is unavailable
+3. **DO NOT** modify CSS bundles (`assets/*.css`) - they are compiled from TailwindCSS
+4. **CAN** modify: `_headers`, `README.md`, `PARETO_VIA_NEGATIVA_ANALYSIS.md`, documentation files
+5. **CAN** add: New static files, documentation, configuration files
+...
+## Technology Stack (Source Code)
+
+The original source (not in this repo) uses:
+- **Framework**: React 18 + Vite
+- **State Management**: Zustand + Dexie (IndexedDB)
+- **UI**: TailwindCSS + Mantine + Framer Motion
+- **Logic Core**: Simulation Engine (Source Only)
+- **Tax Rules**: 2025 Rule Set (Source Only)
+...
+```
+
+### `PARETO_VIA_NEGATIVA_ANALYSIS.md`
+- **Role:** Architectural tracking
+- **Why it matters:** Outlines Block List requirements.
+- **Inclusion Mode:** Excerpt
+- **Covered Region:** The Block List section.
+```markdown
+# PARETO & VIA NEGATIVA ANALYSIS
+
+**Goal:** Maximize Solvency. Minimize Entropy.
+**Philosophy:** "It is vain to do with more what can be done with fewer." - Occam
+
+## 🛡️ The Block List (Architectural Constraints)
+
+| Component | Status | Reasoning |
+| :--- | :--- | :--- |
+| **Source Code** | `BLOCKED` | Repository is a compilation target. Source is maintained externally to enforce "Binary Only" distribution model. |
+| **npm / node_modules** | `BLOCKED` | No build process allowed in this environment. Reduces attack surface and dependency rot. |
+| **Dynamic Server** | `BLOCKED` | Strictly Static PWA. Zero backend ensures 100% data sovereignty and offline capability. |
+| **External CDNs** | `BLOCKED` | "Local Only" privacy mandate. No Google Fonts, no Analytics, no tracking pixels. |
+...
+```
+
+### `.jules/steward.md`
+- **Role:** Developer Logs
+- **Why it matters:** Contains historical constraints and required invariants for the AI assistant.
+- **Inclusion Mode:** Excerpt
+- **Covered Region:** A subset of important recent protocols (e.g. documentation entropy, SVG accessibility).
+```markdown
+**Insight:** Code blocks in documentation for artifact-only repositories create a maintenance liability as they drift from the compiled reality.
+**Protocol:** Documentation should rely on descriptive text rather than executable code blocks in artifact-only environments to prevent misleading users.
+
+## 2026-02-01 - Sentinel - Service Worker Integrity
+**Insight:** Modifying `index.html` (even for version bumps) changes its hash, which must be manually updated in `sw.js` to ensure the PWA updates correctly.
+**Protocol:** Any modification to precached files in an artifact-only repo requires recalculating the file's MD5 and patching `sw.js`.
+
+## 2026-02-01 - Palette - Documentation Restoration
+**Insight:** Referenced architectural trackers (`PARETO_VIA_NEGATIVA_ANALYSIS.md`) that are missing create cognitive load and ambiguity.
+**Protocol:** If a referenced hygiene file is missing, its restoration (even if content is inferred) takes priority over new features to re-establish the "Source of Truth".
+
+...
+**Protocol:** Inject a MutationObserver script in `index.html` to dynamically apply `aria-hidden="true"` and `focusable="false"` to decorative SVGs at runtime, bridging the accessibility gap without breaking the artifact architecture.
+
+## 2026-03-02 - Palette - Maskable Icon Padding
+**Insight:** Android PWA icons (maskable icons) require specific padding to prevent cropping. `pwa-192x192.png` lacked necessary padding.
+**Protocol:** When generating `pwa-192x192.png` from `pwa-512x512.png`, ensure 20% padding is applied to meet maskable icon safe zone requirements.
+...
 ```
 
 ## Summarized Files
-
 - **`404.html`**: A direct, unmodified clone of `index.html`. Required by GitHub pages to route arbitrary SPA URLs back to the client router without throwing a 404 response.
-- **`CLAUDE.md`**: AI assistant instructions explicitly outlining that this repository is artifact-only. Contains commands for CSP hashing and documents the requirement for tri-file version synchronization (`index.html`, `README.md`, `CLAUDE.md`).
-- **`PARETO_VIA_NEGATIVA_ANALYSIS.md`**: An architectural philosophy document. Outlines "Block List" requirements such as strict zero-dependency policies, preventing the use of external CDNs, Google Fonts, or build tools directly in the repo.
-- **`.jules/steward.md`**: A historical ledger of decisions made by AI stewards, primarily covering security updates (CSP parity), UX enhancements (iOS zoom prevention via `touch-action: manipulation`), accessibility patches, and version control mandates.
 - **`sitemap.xml`**: Defines the single canonical production URL (`https://shfqrkhn.github.io/nFIRE/`) and its `lastmod` tracking.
 - **`_redirects`**: Used by platforms like Netlify/Cloudflare to implement SPA routing. Contains a single rule: `/* /index.html 200`.
+- **`assets/*.js`**, **`assets/*.css`**: Minified React application and styling. Source code is completely absent from this repository.
+- **`*.png`, `*.ico`**: App icons and screenshots for PWA manifests and SEO/Social tags.
 
 ## Cross-File Relationships
 - **CSP Parity:** The `Content-Security-Policy` defined in `_headers` must mirror the policy found in the `<meta>` tag of `index.html` (excluding server-only directives like `upgrade-insecure-requests`).
-- **Version Synchronization:** Without a `package.json`, versions are manually maintained simultaneously in the footer of `index.html`, the header badge of `README.md`, and the metadata of `CLAUDE.md`.
+- **Version Synchronization:** Without a `package.json`, versions are manually maintained simultaneously in the footer of `index.html`, `404.html`, the header badge of `README.md`, and the metadata of `CLAUDE.md`. The `verify_artifact_consistency.sh` script enforces this.
 - **PWA Integrity (The Precache Route):** `sw.js` registers exact MD5 revision hashes for `index.html`, `manifest.webmanifest`, and the application icons. Modifying any of these files requires manually computing and updating its hash in `sw.js`.
 - **Routing Duplication:** Modifying `index.html` requires an identical, exact overwrite of `404.html` to prevent GitHub Pages users from experiencing stale hydration issues on deep links.
 - **Runtime Patches:** `index.html` contains an inline `MutationObserver` script that dynamically hooks into the React component tree (defined in `assets/index-*.js`) to inject `aria-hidden` tags into minified SVGs, as source modifications are impossible.
@@ -313,6 +410,6 @@ Sitemap: https://shfqrkhn.github.io/nFIRE/sitemap.xml
 
 ## Packaging Notes
 - **Exclusions:** The `assets/*.js` and `assets/*.css` static bundles were excluded entirely. They are minified build outputs exceeding standard review constraints and provide no readable source signal for an auditing AI without the original source maps. Static images were also omitted.
-- **Compression Decisions:** Since `404.html` is exactly identical to `index.html`, it was summarized rather than duplicated in full to preserve document density. Documentation (README) was significantly excerpted to focus purely on the artifact architecture.
+- **Compression Decisions:** Since `404.html` is exactly identical to `index.html`, it was summarized rather than duplicated in full to preserve document density. Documentation (README, CLAUDE, PARETO, steward) was excerpted to focus purely on the artifact architecture and constraints.
 - **Fidelity Limits:** A downstream reviewer cannot assess the mathematical correctness of the financial formulas, the internal React UI component structure, or the tax bracket constants. These are irretrievably obfuscated within the minified assets.
 - **Missing/Unreadable Content:** As repeatedly stated, the entirety of the original source code (`src/` directory, `package.json`, test suites) is entirely missing from this deployment repository. Downstream reviews must focus strictly on the delivery, caching, and security wrappers.
