@@ -50,6 +50,7 @@ assert(readme.includes("export or back up local data"), "README must document ba
 assert(readme.includes("not financial, investment, tax, legal, or retirement advice"), "README must include the explicit advice disclaimer.");
 
 for (const file of [
+  ".nojekyll",
   "screenshot-main.png",
   "pwa-192x192.png",
   "pwa-512x512.png",
