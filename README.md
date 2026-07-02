@@ -1,5 +1,7 @@
 # nFIRE
 
+<p><a href="https://github.com/sponsors/shfqrkhn?o=esb"><strong>Sponsor this project</strong></a></p>
+
 Deterministic financial independence and solvency engine.
 
 - **Status:** Active flagship
