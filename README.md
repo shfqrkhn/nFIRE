@@ -5,6 +5,7 @@
 Deterministic financial independence and solvency engine.
 
 - **Status:** Active flagship
+- **Version:** v10.1.39
 - **Live Demo:** [shfqrkhn.github.io/nFIRE](https://shfqrkhn.github.io/nFIRE/)
 - **Portfolio Role:** Finance and planning flagship.
 
@@ -40,6 +41,10 @@ Simple FIRE calculators often ignore tax brackets, pension timing, registered-ac
 - No account or backend is required for normal use.
 - Users should export or back up local data before clearing browser storage.
 
+## Disclaimer
+
+nFIRE is a planning aid only. It is not financial, investment, tax, legal, or retirement advice, and outputs are not guarantees.
+
 ## Relationship To Other Projects
 
 nFIRE is the finance flagship. `TS-Dash` remains a stable time-series dashboard utility; finance-specific planning and solvency workflows belong here.
@@ -59,6 +64,13 @@ nFIRE is the finance flagship. `TS-Dash` remains a stable time-series dashboard 
 ## Deployment
 
 Host the repository root on GitHub Pages. The app is static and can also be previewed locally with a simple HTTP server.
+
+## Quality Gates
+
+```bash
+npm test
+bash scripts/verify_artifact_consistency.sh
+```
 
 ## Maintenance
 

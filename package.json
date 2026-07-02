@@ -1,0 +1,9 @@
+{
+  "name": "nfire",
+  "version": "10.1.39",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node tests/static-regression.mjs"
+  }
+}
