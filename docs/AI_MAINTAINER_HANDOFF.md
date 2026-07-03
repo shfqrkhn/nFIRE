@@ -17,6 +17,8 @@ Maintain nFIRE as the finance and solvency-planning flagship. It must stay stati
 - Keep outputs explainable and assumption-driven, not advisory or guaranteed.
 - Keep release artifacts minimal and public-safe.
 - Preserve the future path toward Civic SourceGraph Canada only when it strengthens official-source, household-impact, missed-money prevention, and remedy/access handoff workflows.
+- Do not determine eligibility, file claims, provide legal/tax/financial advice, handle money, or collect sensitive personal data by default.
+- Keep any civic evolution official-source-led, privacy-first, static-first, source-freshness-aware, and clear that the app is an unofficial handoff aid.
 
 ## Key Files
 
@@ -27,6 +29,7 @@ Maintain nFIRE as the finance and solvency-planning flagship. It must stay stati
 - `sw.js`: service worker.
 - `screenshot-main.png`: README/demo image.
 - `README.md`: public positioning, disclaimer, and usage.
+- Private Civic SourceGraph planning references may exist in the local GH workspace docs bundle; do not publish or copy them by default.
 
 ## Required Checks
 
@@ -45,3 +48,4 @@ Also perform link/media checks, a secret scan, and local/static smoke checks bef
 2. Keep assumptions visible and testable.
 3. Improve onboarding only when it reduces user error.
 4. If evolving toward Civic SourceGraph Canada, keep nFIRE's solvency logic as one module inside a broader official-source workflow rather than bolting on unrelated civic features.
+5. Preserve missed-money prevention, access handoff, recall/remedy handoff, official-source provenance, and no-sensitive-data rules if that evolution proceeds.
