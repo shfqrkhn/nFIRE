@@ -20,7 +20,8 @@ const sitemap = read("sitemap.xml");
 const robots = read("robots.txt");
 const sw = read("sw.js");
 const headers = read("_headers");
-const md5 = (file) => crypto.createHash("md5").update(fs.readFileSync(path.join(root, file))).digest("hex");
+const md5Text = (file) =>
+  crypto.createHash("md5").update(read(file).replace(/\r\n/g, "\n")).digest("hex");
 
 const versionMatch = readme.match(/\*\*Version:\*\* v(\d+\.\d+\.\d+)/);
 assert(versionMatch, "README must expose the shipped app version.");
@@ -82,7 +83,7 @@ for (const asset of [...index.matchAll(/(?:src|href)="\.\/([^"]+)"/g)].map((matc
 }
 assert(sw.includes("index.html"), "Service worker must precache the app shell.");
 assert(sw.includes("manifest.webmanifest"), "Service worker must precache the manifest.");
-assert(sw.includes(`{url:"index.html",revision:"${md5("index.html")}"}`), "Service worker index.html revision must match the app shell.");
+assert(sw.includes(`{url:"index.html",revision:"${md5Text("index.html")}"}`), "Service worker index.html revision must match the app shell.");
 assert(!sw.includes("http://") && !sw.includes("https://"), "Service worker must not call external URLs.");
 
 console.log(`OK: static regression checks passed for nFIRE v${version}.`);
