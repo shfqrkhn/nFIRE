@@ -6,7 +6,9 @@ Deterministic financial independence and solvency engine.
 
 - **Status:** Active flagship
 - **Version:** v10.1.39
+- **Latest Release:** [GitHub latest release](https://github.com/shfqrkhn/nFIRE/releases/latest)
 - **Live Demo:** [shfqrkhn.github.io/nFIRE](https://shfqrkhn.github.io/nFIRE/)
+- **License:** MIT
 - **Portfolio Role:** Finance and planning flagship.
 
 nFIRE models long-term financial independence with explicit year-by-year assumptions instead of hiding the plan behind a simple rule of thumb.
@@ -34,6 +36,18 @@ Simple FIRE calculators often ignore tax brackets, pension timing, registered-ac
 3. Review the solvency output.
 4. Adjust pension, retirement, and drawdown assumptions.
 5. Save or export results according to the app workflow.
+
+## Release And Local Use
+
+- **Live/PWA:** Use the live demo in a modern browser and install it from the browser when available.
+- **Local ZIP:** Download the latest release, extract it, and serve the extracted folder with a local static server:
+
+```bash
+python -m http.server 8080
+```
+
+Then open `http://localhost:8080/`. Use a local server instead of opening `index.html` directly, so browser module and service worker behavior match production.
+- **Self-host:** Upload the release contents to any static host that serves the repository root.
 
 ## Privacy And Data Model
 

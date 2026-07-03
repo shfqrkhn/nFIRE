@@ -45,7 +45,11 @@ for (const [file, html] of [
 }
 
 assert(readme.includes("[shfqrkhn.github.io/nFIRE](https://shfqrkhn.github.io/nFIRE/)"), "README must link the live demo.");
+assert(readme.includes("[GitHub latest release](https://github.com/shfqrkhn/nFIRE/releases/latest)"), "README must link the latest release.");
+assert(readme.includes("**License:** MIT"), "README must expose the MIT license above the fold.");
 assert(readme.includes("![nFIRE financial independence dashboard](./screenshot-main.png)"), "README must include the screenshot.");
+assert(readme.includes("python -m http.server 8080"), "README must document the local static-server command.");
+assert(readme.includes("Use a local server instead of opening `index.html` directly"), "README must prevent direct-file launch confusion.");
 assert(readme.includes("No account or backend is required"), "README must document the local-first privacy model.");
 assert(readme.includes("export or back up local data"), "README must document backup/export expectations.");
 assert(readme.includes("not financial, investment, tax, legal, or retirement advice"), "README must include the explicit advice disclaimer.");
