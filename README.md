@@ -5,7 +5,7 @@
 Deterministic financial independence and solvency engine.
 
 - **Status:** Active flagship
-- **Version:** v10.1.39
+- **Version:** v10.1.40
 - **Latest Release:** [GitHub latest release](https://github.com/shfqrkhn/nFIRE/releases/latest)
 - **Live Demo:** [shfqrkhn.github.io/nFIRE](https://shfqrkhn.github.io/nFIRE/)
 - **License:** MIT
