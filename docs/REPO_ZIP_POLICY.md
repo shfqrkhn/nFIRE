@@ -1,6 +1,6 @@
-# Release Artifact Policy
+# Repository ZIP Policy
 
-nFIRE release artifacts may contain only the static planning app, public documentation, public screenshots, and install/runtime assets. User plans and exports must never be bundled.
+Users should run the live GitHub Pages app or download the repository through **Code > Download ZIP**. The repository ZIP may contain only the static planning app, public documentation, public screenshots, and install/runtime assets. User plans and exports must never be bundled.
 
 ## Allowed
 
@@ -14,14 +14,14 @@ nFIRE release artifacts may contain only the static planning app, public documen
 - Claims of financial, investment, tax, legal, retirement, or eligibility advice.
 - Claims that results are guarantees, individualized professional recommendations, or official government/benefit determinations.
 
-## Release Claims
+## Public Claims
 
 - Allowed: static local-first planning aid, Canadian-style planning assumptions, year-by-year solvency illustration, browser-local data, and explicit disclaimers.
 - Not claimed unless separately evidenced: professional advice, eligibility determination, tax/legal correctness, live market-data freshness, external review, or regulated planning certification.
 
 ## Verification
 
-Before publishing release assets, run:
+Before pushing public ZIP/download-facing changes, run:
 
 ```bash
 npm test
@@ -29,4 +29,4 @@ bash scripts/verify_artifact_consistency.sh
 git diff --check
 ```
 
-Release review must verify the ZIP has no user data, backups, private notes, or advice/guarantee language.
+Repository ZIP review must verify the ZIP has no user data, backups, private notes, or advice/guarantee language.

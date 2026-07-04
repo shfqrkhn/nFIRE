@@ -15,7 +15,7 @@ const assert = (condition, message) => {
 const index = read("index.html");
 const notFound = read("404.html");
 const readme = read("README.md");
-const releasePolicy = read("docs/RELEASE_ARTIFACT_POLICY.md");
+const zipPolicy = read("docs/REPO_ZIP_POLICY.md");
 const manifest = JSON.parse(read("manifest.webmanifest"));
 const sitemap = read("sitemap.xml");
 const robots = read("robots.txt");
@@ -46,7 +46,8 @@ for (const [file, html] of [
 }
 
 assert(readme.includes("[shfqrkhn.github.io/nFIRE](https://shfqrkhn.github.io/nFIRE/)"), "README must link the live demo.");
-assert(readme.includes("[GitHub latest release](https://github.com/shfqrkhn/nFIRE/releases/latest)"), "README must link the latest release.");
+assert(readme.includes("[Download current main ZIP](https://github.com/shfqrkhn/nFIRE/archive/refs/heads/main.zip)"), "README must link the repository ZIP.");
+assert(!readme.includes("/releases/latest"), "README must not link GitHub Releases.");
 assert(readme.includes("**License:** MIT"), "README must expose the MIT license above the fold.");
 assert(readme.includes("![nFIRE financial independence dashboard](./screenshot-main.png)"), "README must include the screenshot.");
 assert(readme.includes("python -m http.server 8080"), "README must document the local static-server command.");
@@ -54,9 +55,9 @@ assert(readme.includes("Use a local server instead of opening `index.html` direc
 assert(readme.includes("No account or backend is required"), "README must document the local-first privacy model.");
 assert(readme.includes("export or back up local data"), "README must document backup/export expectations.");
 assert(readme.includes("not financial, investment, tax, legal, or retirement advice"), "README must include the explicit advice disclaimer.");
-assert(releasePolicy.includes("User plans and exports must never be bundled"), "Release policy must block bundled user plans.");
-assert(releasePolicy.includes("Claims of financial, investment, tax, legal, retirement, or eligibility advice"), "Release policy must block advice claims.");
-assert(releasePolicy.includes("bash scripts/verify_artifact_consistency.sh"), "Release policy must include artifact consistency verification.");
+assert(zipPolicy.includes("User plans and exports must never be bundled"), "Repository ZIP policy must block bundled user plans.");
+assert(zipPolicy.includes("Claims of financial, investment, tax, legal, retirement, or eligibility advice"), "Repository ZIP policy must block advice claims.");
+assert(zipPolicy.includes("bash scripts/verify_artifact_consistency.sh"), "Repository ZIP policy must include artifact consistency verification.");
 
 for (const file of [
   ".nojekyll",

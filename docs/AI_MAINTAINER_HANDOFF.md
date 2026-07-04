@@ -15,7 +15,7 @@ Maintain nFIRE as the finance and solvency-planning flagship. It must stay stati
 - Keep planning data local to the browser.
 - Preserve Canadian-style planning orientation unless the repo deliberately expands scope.
 - Keep outputs explainable and assumption-driven, not advisory or guaranteed.
-- Keep release artifacts minimal and public-safe.
+- Keep repository ZIP/download contents minimal and public-safe.
 - Preserve the future path toward Civic SourceGraph Canada only when it strengthens official-source, household-impact, missed-money prevention, and remedy/access handoff workflows.
 - Do not determine eligibility, file claims, provide legal/tax/financial advice, handle money, or collect sensitive personal data by default.
 - Keep any civic evolution official-source-led, privacy-first, static-first, source-freshness-aware, and clear that the app is an unofficial handoff aid.
@@ -24,7 +24,7 @@ Maintain nFIRE as the finance and solvency-planning flagship. It must stay stati
 
 - `index.html`: static app entrypoint.
 - `assets/`: app assets.
-- `scripts/`: validation and release consistency scripts.
+- `scripts/`: validation and public ZIP consistency scripts.
 - `manifest.webmanifest`: install metadata.
 - `sw.js`: service worker.
 - `screenshot-main.png`: README/demo image.
@@ -40,7 +40,7 @@ npm test
 bash scripts/verify_artifact_consistency.sh
 ```
 
-Also perform link/media checks, a secret scan, and local/static smoke checks before release or Pages updates.
+Also perform link/media checks, a secret scan, and local/static smoke checks before public ZIP/download-facing or Pages updates.
 
 ## Known Continuation Priorities
 
