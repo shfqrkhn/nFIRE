@@ -15,6 +15,7 @@ const assert = (condition, message) => {
 const index = read("index.html");
 const notFound = read("404.html");
 const readme = read("README.md");
+const releasePolicy = read("docs/RELEASE_ARTIFACT_POLICY.md");
 const manifest = JSON.parse(read("manifest.webmanifest"));
 const sitemap = read("sitemap.xml");
 const robots = read("robots.txt");
@@ -53,6 +54,9 @@ assert(readme.includes("Use a local server instead of opening `index.html` direc
 assert(readme.includes("No account or backend is required"), "README must document the local-first privacy model.");
 assert(readme.includes("export or back up local data"), "README must document backup/export expectations.");
 assert(readme.includes("not financial, investment, tax, legal, or retirement advice"), "README must include the explicit advice disclaimer.");
+assert(releasePolicy.includes("User plans and exports must never be bundled"), "Release policy must block bundled user plans.");
+assert(releasePolicy.includes("Claims of financial, investment, tax, legal, retirement, or eligibility advice"), "Release policy must block advice claims.");
+assert(releasePolicy.includes("bash scripts/verify_artifact_consistency.sh"), "Release policy must include artifact consistency verification.");
 
 for (const file of [
   ".nojekyll",

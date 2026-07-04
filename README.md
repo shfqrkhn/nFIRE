@@ -11,6 +11,7 @@ Deterministic financial independence and solvency engine.
 - **License:** MIT
 - **Portfolio Role:** Finance and planning flagship.
 - **Maintainer handoff:** [`docs/AI_MAINTAINER_HANDOFF.md`](./docs/AI_MAINTAINER_HANDOFF.md)
+- **Release artifact policy:** [`docs/RELEASE_ARTIFACT_POLICY.md`](./docs/RELEASE_ARTIFACT_POLICY.md)
 
 nFIRE models long-term financial independence with explicit year-by-year assumptions instead of hiding the plan behind a simple rule of thumb.
 
