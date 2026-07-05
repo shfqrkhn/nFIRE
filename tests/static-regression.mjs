@@ -1,3 +1,4 @@
+import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import crypto from "node:crypto";
 import path from "node:path";
@@ -24,9 +25,16 @@ const sitemap = read("sitemap.xml");
 const robots = read("robots.txt");
 const sw = read("sw.js");
 const headers = read("_headers");
+const forbiddenTrackedPathPattern = /(^|\/)(node_modules|offline|linkedin-post-package|test-results|playwright-report|\.codex-remote-attachments)(\/|$)|^data\/(manual-overrides\.json|latest-simulation\.json|scoreboards)(\/|$)|(^|\/).*\.((env)|(pem)|(key)|(p12)|(pfx))$|(^|\/)(exports?|backups?|logs?|scratch)(\/|$)/i;
+const trackedFiles = execFileSync("git", ["ls-files"], { cwd: root, encoding: "utf8" })
+  .split(/\r?\n/)
+  .filter(Boolean)
+  .map((file) => file.replace(/\\/g, "/"));
+const forbiddenTrackedFiles = trackedFiles.filter((file) => forbiddenTrackedPathPattern.test(file));
 const md5Text = (file) =>
   crypto.createHash("md5").update(read(file).replace(/\r\n/g, "\n")).digest("hex");
 
+assert(forbiddenTrackedFiles.length === 0, `Forbidden tracked paths: ${forbiddenTrackedFiles.join(", ")}`);
 const versionMatch = readme.match(/\*\*Version:\*\* v(\d+\.\d+\.\d+)/);
 assert(versionMatch, "README must expose the shipped app version.");
 const version = versionMatch[1];
