@@ -28,6 +28,12 @@ Maintain nFIRE as the finance and solvency-planning flagship. It must stay stati
 - Operations truth: live Pages or current main repository ZIP are the only distribution paths; GitHub Releases stay absent.
 - Transfer truth: update this handoff and the evidence receipt when assumptions, calculations, disclaimers, artifacts, or public-surface guarantees change.
 
+## Doctrine Delta Decision
+
+- After incidents, rescue runs, maturity passes, or repeated failures, classify reusable lessons as `promote`, `reject`, `quarantine`, or `keep_local`.
+- Promote only source-backed, reusable, non-secret lessons that strengthen a gate, checklist, source rule, or failure guard without weakening planning-aid boundaries.
+- Keep private, project-specific, speculative, or unverified lessons out of public repos unless the user explicitly approves publication.
+
 ## Key Files
 
 - `index.html`: static app entrypoint.
