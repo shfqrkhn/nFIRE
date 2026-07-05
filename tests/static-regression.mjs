@@ -17,6 +17,7 @@ const notFound = read("404.html");
 const readme = read("README.md");
 const zipPolicy = read("docs/REPO_ZIP_POLICY.md");
 const evidenceReceipt = read("docs/EVIDENCE_RECEIPT.md");
+const handoff = read("docs/AI_MAINTAINER_HANDOFF.md");
 const manifest = JSON.parse(read("manifest.webmanifest"));
 const sitemap = read("sitemap.xml");
 const robots = read("robots.txt");
@@ -62,6 +63,9 @@ assert(zipPolicy.includes("bash scripts/verify_artifact_consistency.sh"), "Repos
 assert(evidenceReceipt.includes("PASS_WITH_LIMITATIONS"), "Evidence receipt must define limited claims.");
 assert(evidenceReceipt.includes("Planning aid only"), "Evidence receipt must preserve planning-aid boundary.");
 assert(evidenceReceipt.includes("No financial, tax, legal, investment, retirement, or eligibility advice."), "Evidence receipt must block advice claims.");
+for (const phrase of ["OmniOS Transfer Contract", "Product truth", "Execution truth", "Evidence truth", "Operations truth", "Transfer truth", "GitHub Releases stay absent"]) {
+  assert(handoff.includes(phrase), `Handoff missing OmniOS transfer contract term: ${phrase}`);
+}
 
 for (const file of [
   ".nojekyll",

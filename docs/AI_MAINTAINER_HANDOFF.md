@@ -20,6 +20,14 @@ Maintain nFIRE as the finance and solvency-planning flagship. It must stay stati
 - Do not determine eligibility, file claims, provide legal/tax/financial advice, handle money, or collect sensitive personal data by default.
 - Keep any civic evolution official-source-led, privacy-first, static-first, source-freshness-aware, and clear that the app is an unofficial handoff aid.
 
+## OmniOS Transfer Contract
+
+- Product truth: static local-first planning aid, not financial, tax, legal, investment, retirement, or eligibility advice.
+- Execution truth: preserve assumption, artifact-consistency, static, export/import, and disclaimer gates before publishing.
+- Evidence truth: use `docs/EVIDENCE_RECEIPT.md`, visible assumptions, artifact checks, and tests; public claims must stay within `PASS` or `PASS_WITH_LIMITATIONS`.
+- Operations truth: live Pages or current main repository ZIP are the only distribution paths; GitHub Releases stay absent.
+- Transfer truth: update this handoff and the evidence receipt when assumptions, calculations, disclaimers, artifacts, or public-surface guarantees change.
+
 ## Key Files
 
 - `index.html`: static app entrypoint.
