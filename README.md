@@ -59,7 +59,7 @@ Then open `http://localhost:8080/`. Use a local server instead of opening `index
 
 ## Disclaimer
 
-nFIRE is a planning aid only. It is not financial, investment, tax, legal, or retirement advice, and outputs are not guarantees.
+nFIRE is a planning aid only. It is not financial, investment, tax, legal, retirement, or eligibility advice. It does not determine eligibility, and outputs are not guarantees.
 
 ## Relationship To Other Projects
 
@@ -91,7 +91,7 @@ npm run qa
 
 ## Maintenance
 
-Keep financial assumptions explicit, version visible changes, and avoid implying regulated financial advice. Treat outputs as planning aids, not guarantees.
+Keep financial assumptions explicit, version visible changes, and avoid implying regulated financial advice or eligibility determinations. Treat outputs as planning aids, not guarantees.
 
 ## License
 

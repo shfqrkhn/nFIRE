@@ -90,7 +90,7 @@ for (const [file, html] of [
   assert(/rel="preload" href="\.\/assets\/[^"]+\.css" as="style" crossorigin/.test(html), `${file} CSS preload must match stylesheet credentials.`);
   assert(html.includes("touch-action: manipulation"), `${file} must keep touch-friendly controls.`);
   assert(html.includes("github.com/sponsors/shfqrkhn?o=esb"), `${file} must expose the Sponsor link.`);
-  assert(html.includes("Planning aid only. Not financial, investment, tax, legal, or retirement advice."), `${file} must expose the finance disclaimer.`);
+  assert(html.includes("Planning aid only. Not financial, investment, tax, legal, retirement, or eligibility advice."), `${file} must expose the finance and eligibility disclaimer.`);
   assert(html.includes("local-first planning aid"), `${file} metadata must preserve planning-aid positioning.`);
   assert(!html.includes("financial independence engine"), `${file} metadata must not position the app as an advisory engine.`);
   assert(!/\b(eligibility determination|official government\/benefit determination|individualized professional recommendation)\b/i.test(html), `${file} must not imply eligibility or professional recommendation output.`);
@@ -106,7 +106,8 @@ assert(readme.includes("python -m http.server 8080"), "README must document the 
 assert(readme.includes("Use a local server instead of opening `index.html` directly"), "README must prevent direct-file launch confusion.");
 assert(readme.includes("No account or backend is required"), "README must document the local-first privacy model.");
 assert(readme.includes("export or back up local data"), "README must document backup/export expectations.");
-assert(readme.includes("not financial, investment, tax, legal, or retirement advice"), "README must include the explicit advice disclaimer.");
+assert(readme.includes("not financial, investment, tax, legal, retirement, or eligibility advice"), "README must include the explicit advice and eligibility disclaimer.");
+assert(readme.includes("It does not determine eligibility"), "README must explicitly block eligibility determinations.");
 assert(zipPolicy.includes("User plans and exports must never be bundled"), "Repository ZIP policy must block bundled user plans.");
 assert(zipPolicy.includes("Claims of financial, investment, tax, legal, retirement, or eligibility advice"), "Repository ZIP policy must block advice claims.");
 assert(zipPolicy.includes("git archive"), "Repository ZIP policy must tie download claims to generated archive evidence.");
