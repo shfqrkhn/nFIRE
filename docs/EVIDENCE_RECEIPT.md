@@ -28,6 +28,12 @@ This public-safe receipt keeps nFIRE claims tied to evidence instead of chat his
 - If any proof is missing, stale, or contradicted by GitHub/repo/assumption state, record the repo as `PASS_WITH_LIMITATIONS`, `NOT_RUN`, `BLOCKED`, or `NO_GO` instead of safe.
 - The final status table must name remaining risks rather than implying safety from silence.
 
+## Input Accessibility Evidence
+
+- Critical planning workflows must remain usable by keyboard-only, mouse/pointer-only, and touch-only users.
+- Accessibility claims require current evidence from static control checks, touch-action checks, focus/label review, and live/manual verification where applicable.
+- If a workflow lacks direct input-mode coverage, label it `PASS_WITH_LIMITATIONS` or `NOT_RUN`; do not claim full accessibility from static rendering alone.
+
 ## Claim Boundaries
 
 | Area | Class | Evidence | Limit |
@@ -37,6 +43,7 @@ This public-safe receipt keeps nFIRE claims tied to evidence instead of chat his
 | Explicit assumptions | `PASS_WITH_LIMITATIONS` | README, app flow, static tests | Assumption correctness is not a professional review. |
 | Year-by-year solvency illustration | `PASS_WITH_LIMITATIONS` | app behavior and tests | Results are illustrations, not guarantees or regulated determinations. |
 | Repository ZIP safety | `PASS_WITH_LIMITATIONS` | `docs/REPO_ZIP_POLICY.md`, artifact consistency script | Recheck no user plans, exports, PII, backups, or private notes are bundled. |
+| Input accessibility | `PASS_WITH_LIMITATIONS` | static touch-friendly checks and manual/live verification when performed | Does not certify screen-reader behavior or every input path. |
 
 ## Required Before Public-Facing Change
 
