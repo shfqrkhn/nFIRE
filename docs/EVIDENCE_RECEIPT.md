@@ -10,6 +10,12 @@ This public-safe receipt keeps nFIRE claims tied to evidence instead of chat his
 - `BLOCKED`: cannot be checked until an external condition changes.
 - `NO_GO`: failed or unsafe; do not publish until fixed.
 
+## Claim Firewall Invariant
+
+- Every public technical, security, privacy, download, finance, planning, tax, legal, retirement, or eligibility claim must map to a `Claim Boundaries` row or be added with evidence before publication.
+- Public claims may not exceed `PASS` or `PASS_WITH_LIMITATIONS`; `NOT_RUN`, `BLOCKED`, and `NO_GO` items must stay unpublished or be labeled as unavailable.
+- Volatile assumptions, policy, financial, tax, legal, retirement, eligibility, and GitHub settings must be rechecked from current source/repo state before reliance.
+
 ## Claim Boundaries
 
 | Area | Class | Evidence | Limit |
