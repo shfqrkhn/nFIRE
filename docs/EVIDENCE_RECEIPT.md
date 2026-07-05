@@ -34,6 +34,12 @@ This public-safe receipt keeps nFIRE claims tied to evidence instead of chat his
 - Accessibility claims require current evidence from static control checks, touch-action checks, focus/label review, and live/manual verification where applicable.
 - If a workflow lacks direct input-mode coverage, label it `PASS_WITH_LIMITATIONS` or `NOT_RUN`; do not claim full accessibility from static rendering alone.
 
+## Recovery And Data Safety Evidence
+
+- Export, backup, reset, browser-storage, and recovery claims must remain user-controlled, local-first, and tied to current tests or explicit manual evidence.
+- Recovery claims may cover documented export/backup expectations and artifact safety only within tested paths; they must not imply professional recordkeeping, cloud backup, or reconstruction after browser data loss.
+- If a storage, export/import, or recovery path is not covered in the current pass, label it `PASS_WITH_LIMITATIONS` or `NOT_RUN` before public use.
+
 ## Claim Boundaries
 
 | Area | Class | Evidence | Limit |
@@ -44,6 +50,7 @@ This public-safe receipt keeps nFIRE claims tied to evidence instead of chat his
 | Year-by-year solvency illustration | `PASS_WITH_LIMITATIONS` | app behavior and tests | Results are illustrations, not guarantees or regulated determinations. |
 | Repository ZIP safety | `PASS_WITH_LIMITATIONS` | `docs/REPO_ZIP_POLICY.md`, artifact consistency script | Recheck no user plans, exports, PII, backups, or private notes are bundled. |
 | Input accessibility | `PASS_WITH_LIMITATIONS` | static touch-friendly checks and manual/live verification when performed | Does not certify screen-reader behavior or every input path. |
+| Recovery/data safety | `PASS_WITH_LIMITATIONS` | README export/backup guidance, static tests, artifact consistency script | Does not guarantee recovery after local browser data loss. |
 
 ## Required Before Public-Facing Change
 
