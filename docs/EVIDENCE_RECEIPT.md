@@ -16,6 +16,12 @@ This public-safe receipt keeps nFIRE claims tied to evidence instead of chat his
 - Public claims may not exceed `PASS` or `PASS_WITH_LIMITATIONS`; `NOT_RUN`, `BLOCKED`, and `NO_GO` items must stay unpublished or be labeled as unavailable.
 - Volatile assumptions, policy, financial, tax, legal, retirement, eligibility, and GitHub settings must be rechecked from current source/repo state before reliance.
 
+## Currentness Watchdog
+
+- Recheck claim evidence before public-facing changes, not on a fixed calendar.
+- If current evidence is stale, missing, inaccessible, or contradicted by assumption/source/repo/GitHub state, downgrade the affected claim to `NOT_RUN`, `BLOCKED`, or `NO_GO`.
+- Do not preserve old status snapshots as proof after assumptions, calculations, disclaimers, artifacts, workflows, or public planning wording changes.
+
 ## Claim Boundaries
 
 | Area | Class | Evidence | Limit |
