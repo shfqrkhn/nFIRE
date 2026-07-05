@@ -50,8 +50,7 @@ Maintain nFIRE as the finance and solvency-planning flagship. It must stay stati
 Run after material changes:
 
 ```bash
-npm test
-bash scripts/verify_artifact_consistency.sh
+npm run qa
 ```
 
 Also perform link/media checks, a secret scan, and local/static smoke checks before public ZIP/download-facing or Pages updates.

@@ -62,8 +62,7 @@ This public-safe receipt keeps nFIRE claims tied to evidence instead of chat his
 
 - `git status --short --ignored`
 - `git rev-list --left-right --count HEAD..."@{u}"`
-- `npm test`
-- `bash scripts/verify_artifact_consistency.sh`
+- `npm run qa`
 - `git diff --check`
 - protected-path scan
 - live Pages check after runtime or public-surface changes

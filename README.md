@@ -84,9 +84,10 @@ Host the repository root on GitHub Pages. The app is static and can also be prev
 ## Quality Gates
 
 ```bash
-npm test
-bash scripts/verify_artifact_consistency.sh
+npm run qa
 ```
+
+`npm run qa` runs the static regression gate and artifact consistency check.
 
 ## Maintenance
 

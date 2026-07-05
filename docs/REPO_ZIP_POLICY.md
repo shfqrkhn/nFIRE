@@ -24,8 +24,7 @@ Users should run the live GitHub Pages app or download the repository through **
 Before pushing public ZIP/download-facing changes, run:
 
 ```bash
-npm test
-bash scripts/verify_artifact_consistency.sh
+npm run qa
 git diff --check
 ```
 
