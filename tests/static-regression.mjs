@@ -78,6 +78,9 @@ for (const phrase of ["Input Accessibility Evidence", "keyboard-only", "mouse/po
 for (const phrase of ["Recovery And Data Safety Evidence", "Export, backup, reset", "user-controlled", "local-first", "browser data loss", "Recovery/data safety"]) {
   assert(evidenceReceipt.includes(phrase), `Evidence receipt missing recovery/data safety term: ${phrase}`);
 }
+for (const phrase of ["Assumption And Explainability Evidence", "user-editable planning inputs", "professional review, advice, eligibility screening", "visible inputs", "documented formulas", "source, freshness, limitation, and failure behavior"]) {
+  assert(evidenceReceipt.includes(phrase), `Evidence receipt missing assumption/explainability term: ${phrase}`);
+}
 for (const phrase of ["OmniOS Transfer Contract", "Product truth", "Execution truth", "Evidence truth", "Operations truth", "Transfer truth", "GitHub Releases stay absent"]) {
   assert(handoff.includes(phrase), `Handoff missing OmniOS transfer contract term: ${phrase}`);
 }

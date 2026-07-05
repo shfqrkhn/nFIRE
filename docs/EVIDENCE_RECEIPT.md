@@ -40,14 +40,20 @@ This public-safe receipt keeps nFIRE claims tied to evidence instead of chat his
 - Recovery claims may cover documented export/backup expectations and artifact safety only within tested paths; they must not imply professional recordkeeping, cloud backup, or reconstruction after browser data loss.
 - If a storage, export/import, or recovery path is not covered in the current pass, label it `PASS_WITH_LIMITATIONS` or `NOT_RUN` before public use.
 
+## Assumption And Explainability Evidence
+
+- Assumption, tax, pension, inflation, return, drawdown, or solvency claims must remain user-editable planning inputs or transparent calculations; they are not professional review, advice, eligibility screening, or a guarantee.
+- Public wording may claim year-by-year explainability only when outputs can be traced to visible inputs, documented formulas, and current artifact-consistency checks.
+- External policy, benefit, tax, or market references are not evidence for app claims until their source, freshness, limitation, and failure behavior are documented; stale or unverified references must be labeled as assumptions or omitted.
+
 ## Claim Boundaries
 
 | Area | Class | Evidence | Limit |
 | --- | --- | --- | --- |
 | Static local-first planner | `PASS` | README, app shell, service worker, static tests | Browser storage and export handling remain user-controlled. |
 | Planning aid only | `PASS` | README, app disclaimer, static tests | No financial, tax, legal, investment, retirement, or eligibility advice. |
-| Explicit assumptions | `PASS_WITH_LIMITATIONS` | README, app flow, static tests | Assumption correctness is not a professional review. |
-| Year-by-year solvency illustration | `PASS_WITH_LIMITATIONS` | app behavior and tests | Results are illustrations, not guarantees or regulated determinations. |
+| Explicit assumptions | `PASS_WITH_LIMITATIONS` | README, app flow, static tests, assumption/explainability evidence | Assumption correctness is not a professional review or external policy verification. |
+| Year-by-year solvency illustration | `PASS_WITH_LIMITATIONS` | app behavior, documented formulas, artifact checks | Results are illustrations, not guarantees, advice, or regulated determinations. |
 | Repository ZIP safety | `PASS_WITH_LIMITATIONS` | `docs/REPO_ZIP_POLICY.md`, artifact consistency script | Recheck no user plans, exports, PII, backups, or private notes are bundled. |
 | Input accessibility | `PASS_WITH_LIMITATIONS` | static touch-friendly checks and manual/live verification when performed | Does not certify screen-reader behavior or every input path. |
 | Recovery/data safety | `PASS_WITH_LIMITATIONS` | README export/backup guidance, static tests, artifact consistency script | Does not guarantee recovery after local browser data loss. |
