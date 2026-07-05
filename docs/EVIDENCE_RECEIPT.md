@@ -62,7 +62,7 @@ This public-safe receipt keeps nFIRE claims tied to evidence instead of chat his
 ## Required Before Public-Facing Change
 
 - `git status --short --ignored`
-- `git rev-list --left-right --count HEAD..."@{u}"`
+- `git rev-list --left-right --count 'HEAD...@{u}'`
 - `npm run qa`
 - `git diff --check`
 - protected-path scan
