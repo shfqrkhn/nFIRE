@@ -16,6 +16,7 @@ const index = read("index.html");
 const notFound = read("404.html");
 const readme = read("README.md");
 const zipPolicy = read("docs/REPO_ZIP_POLICY.md");
+const evidenceReceipt = read("docs/EVIDENCE_RECEIPT.md");
 const manifest = JSON.parse(read("manifest.webmanifest"));
 const sitemap = read("sitemap.xml");
 const robots = read("robots.txt");
@@ -58,6 +59,9 @@ assert(readme.includes("not financial, investment, tax, legal, or retirement adv
 assert(zipPolicy.includes("User plans and exports must never be bundled"), "Repository ZIP policy must block bundled user plans.");
 assert(zipPolicy.includes("Claims of financial, investment, tax, legal, retirement, or eligibility advice"), "Repository ZIP policy must block advice claims.");
 assert(zipPolicy.includes("bash scripts/verify_artifact_consistency.sh"), "Repository ZIP policy must include artifact consistency verification.");
+assert(evidenceReceipt.includes("PASS_WITH_LIMITATIONS"), "Evidence receipt must define limited claims.");
+assert(evidenceReceipt.includes("Planning aid only"), "Evidence receipt must preserve planning-aid boundary.");
+assert(evidenceReceipt.includes("No financial, tax, legal, investment, retirement, or eligibility advice."), "Evidence receipt must block advice claims.");
 
 for (const file of [
   ".nojekyll",

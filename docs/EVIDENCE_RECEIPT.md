@@ -1,0 +1,31 @@
+# Evidence Receipt
+
+This public-safe receipt keeps nFIRE claims tied to evidence instead of chat history.
+
+## Evidence Classes
+
+- `PASS`: directly covered by current files, tests, or checks.
+- `PASS_WITH_LIMITATIONS`: true only within the stated scope.
+- `NOT_RUN`: not checked in the current pass.
+- `BLOCKED`: cannot be checked until an external condition changes.
+- `NO_GO`: failed or unsafe; do not publish until fixed.
+
+## Claim Boundaries
+
+| Area | Class | Evidence | Limit |
+| --- | --- | --- | --- |
+| Static local-first planner | `PASS` | README, app shell, service worker, static tests | Browser storage and export handling remain user-controlled. |
+| Planning aid only | `PASS` | README, app disclaimer, static tests | No financial, tax, legal, investment, retirement, or eligibility advice. |
+| Explicit assumptions | `PASS_WITH_LIMITATIONS` | README, app flow, static tests | Assumption correctness is not a professional review. |
+| Year-by-year solvency illustration | `PASS_WITH_LIMITATIONS` | app behavior and tests | Results are illustrations, not guarantees or regulated determinations. |
+| Repository ZIP safety | `PASS_WITH_LIMITATIONS` | `docs/REPO_ZIP_POLICY.md`, artifact consistency script | Recheck no user plans, exports, PII, backups, or private notes are bundled. |
+
+## Required Before Public-Facing Change
+
+- `git status --short --ignored`
+- `git rev-list --left-right --count HEAD..."@{u}"`
+- `npm test`
+- `bash scripts/verify_artifact_consistency.sh`
+- `git diff --check`
+- protected-path scan
+- live Pages check after runtime or public-surface changes
