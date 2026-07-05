@@ -55,7 +55,7 @@ This public-safe receipt keeps nFIRE claims tied to evidence instead of chat his
 | Planning aid only | `PASS` | README, app disclaimer, static tests | No financial, tax, legal, investment, retirement, or eligibility advice. |
 | Explicit assumptions | `PASS_WITH_LIMITATIONS` | README, app flow, static tests, assumption/explainability evidence | Assumption correctness is not a professional review or external policy verification. |
 | Year-by-year solvency illustration | `PASS_WITH_LIMITATIONS` | app behavior, documented formulas, artifact checks | Results are illustrations, not guarantees, advice, or regulated determinations. |
-| Repository ZIP safety | `PASS_WITH_LIMITATIONS` | `docs/REPO_ZIP_POLICY.md`, artifact consistency script | Recheck no user plans, exports, PII, backups, or private notes are bundled. |
+| Repository ZIP safety | `PASS_WITH_LIMITATIONS` | `docs/REPO_ZIP_POLICY.md`, `git archive`, artifact consistency script | Recheck no user plans, exports, PII, backups, or private notes are bundled. |
 | Input accessibility | `PASS_WITH_LIMITATIONS` | static touch-friendly checks and manual/live verification when performed | Does not certify screen-reader behavior or every input path. |
 | Recovery/data safety | `PASS_WITH_LIMITATIONS` | README export/backup guidance, static tests, artifact consistency script | Does not guarantee recovery after local browser data loss. |
 

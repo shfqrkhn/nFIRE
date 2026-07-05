@@ -33,10 +33,46 @@ const trackedFiles = execFileSync("git", ["ls-files"], { cwd: root, encoding: "u
   .filter(Boolean)
   .map((file) => file.replace(/\\/g, "/"));
 const forbiddenTrackedFiles = trackedFiles.filter((file) => forbiddenTrackedPathPattern.test(file));
+function gitArchiveEntries() {
+  const archive = execFileSync("git", ["archive", "--format=tar", "HEAD"], {
+    cwd: root,
+    maxBuffer: 128 * 1024 * 1024,
+  });
+  const entries = [];
+  for (let offset = 0; offset + 512 <= archive.length;) {
+    const header = archive.subarray(offset, offset + 512);
+    if (header.every((byte) => byte === 0)) break;
+    const name = header.toString("utf8", 0, 100).replace(/\0.*$/, "");
+    const prefix = header.toString("utf8", 345, 500).replace(/\0.*$/, "");
+    const sizeRaw = header.toString("utf8", 124, 136).replace(/\0.*$/, "").trim();
+    const size = sizeRaw ? parseInt(sizeRaw, 8) : 0;
+    const fullName = [prefix, name].filter(Boolean).join("/");
+    if (fullName) entries.push(fullName.replace(/\\/g, "/"));
+    offset += 512 + Math.ceil(size / 512) * 512;
+  }
+  return entries;
+}
+const archiveEntries = gitArchiveEntries();
+const forbiddenArchiveEntries = archiveEntries.filter((file) => forbiddenTrackedPathPattern.test(file));
+const requiredArchiveEntries = [
+  "index.html",
+  "404.html",
+  "README.md",
+  "docs/REPO_ZIP_POLICY.md",
+  "manifest.webmanifest",
+  "sw.js",
+  "_headers",
+  "_redirects",
+  "screenshot-main.png",
+];
 const md5Text = (file) =>
   crypto.createHash("md5").update(read(file).replace(/\r\n/g, "\n")).digest("hex");
 
 assert(forbiddenTrackedFiles.length === 0, `Forbidden tracked paths: ${forbiddenTrackedFiles.join(", ")}`);
+assert(forbiddenArchiveEntries.length === 0, `Forbidden generated archive paths: ${forbiddenArchiveEntries.join(", ")}`);
+for (const file of requiredArchiveEntries) {
+  assert(archiveEntries.includes(file), `Generated repository archive must include runtime path: ${file}`);
+}
 const versionMatch = readme.match(/\*\*Version:\*\* v(\d+\.\d+\.\d+)/);
 assert(versionMatch, "README must expose the shipped app version.");
 const version = versionMatch[1];
@@ -73,6 +109,7 @@ assert(readme.includes("export or back up local data"), "README must document ba
 assert(readme.includes("not financial, investment, tax, legal, or retirement advice"), "README must include the explicit advice disclaimer.");
 assert(zipPolicy.includes("User plans and exports must never be bundled"), "Repository ZIP policy must block bundled user plans.");
 assert(zipPolicy.includes("Claims of financial, investment, tax, legal, retirement, or eligibility advice"), "Repository ZIP policy must block advice claims.");
+assert(zipPolicy.includes("git archive"), "Repository ZIP policy must tie download claims to generated archive evidence.");
 assert(pkg.scripts?.["test:artifact"] === "bash scripts/verify_artifact_consistency.sh", "package must expose artifact consistency verification.");
 assert(pkg.scripts?.qa === "npm test && npm run test:artifact", "package must expose the full QA gate.");
 assert(readme.includes("npm run qa"), "README must document the full QA gate.");
@@ -93,6 +130,7 @@ for (const phrase of ["Safe-To-Publish Receipt", "clean synced tree", "no GitHub
 }
 assert(evidenceReceipt.includes("git rev-list --left-right --count 'HEAD...@{u}'"), "Evidence receipt must preserve the PowerShell-safe upstream delta command.");
 assert(evidenceReceipt.includes("gh release list --limit 5"), "Evidence receipt must require a GitHub Releases absence check.");
+assert(evidenceReceipt.includes("git archive"), "Evidence receipt must tie repository ZIP safety to generated archive evidence.");
 for (const phrase of ["Runtime app code scanning", ".github/workflows/codeql.yml", "CodeQL JavaScript analysis", "PASS_WITH_LIMITATIONS"]) {
   assert(evidenceReceipt.includes(phrase), `Evidence receipt missing code scanning term: ${phrase}`);
 }
@@ -148,6 +186,7 @@ assert(headers.includes("frame-ancestors 'none'"), "_headers must keep the live 
 
 for (const asset of [...index.matchAll(/(?:src|href)="\.\/([^"]+)"/g)].map((match) => match[1])) {
   assert(exists(asset), `Referenced asset ${asset} must exist.`);
+  assert(archiveEntries.includes(asset), `Generated repository archive must include referenced asset: ${asset}`);
 }
 assert(sw.includes("index.html"), "Service worker must precache the app shell.");
 assert(sw.includes("manifest.webmanifest"), "Service worker must precache the manifest.");

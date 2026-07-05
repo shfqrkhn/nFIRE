@@ -1,6 +1,6 @@
 # Repository ZIP Policy
 
-Users should run the live GitHub Pages app or download the repository through **Code > Download ZIP**. The repository ZIP may contain only the static planning app, public documentation, public screenshots, and install/runtime assets. User plans and exports must never be bundled.
+Users should run the live GitHub Pages app or download the repository through **Code > Download ZIP**. The generated repository ZIP may contain only the static planning app, public documentation, public screenshots, and install/runtime assets. User plans and exports must never be bundled.
 
 ## Allowed
 
@@ -29,3 +29,4 @@ git diff --check
 ```
 
 Repository ZIP review must verify the ZIP has no user data, backups, private notes, or advice/guarantee language.
+Use `git archive --format=tar HEAD` as the local generated-archive proxy when checking runtime entries, referenced assets, and forbidden archive paths before public download-facing changes.
