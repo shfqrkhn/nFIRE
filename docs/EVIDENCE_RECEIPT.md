@@ -63,6 +63,7 @@ This public-safe receipt keeps nFIRE claims tied to evidence instead of chat his
 
 - `git status --short --ignored`
 - `git rev-list --left-right --count 'HEAD...@{u}'`
+- `gh release list --limit 5` returns no releases
 - `npm run qa`
 - `git diff --check`
 - protected-path scan
