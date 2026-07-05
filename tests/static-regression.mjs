@@ -55,6 +55,9 @@ for (const [file, html] of [
   assert(html.includes("touch-action: manipulation"), `${file} must keep touch-friendly controls.`);
   assert(html.includes("github.com/sponsors/shfqrkhn?o=esb"), `${file} must expose the Sponsor link.`);
   assert(html.includes("Planning aid only. Not financial, investment, tax, legal, or retirement advice."), `${file} must expose the finance disclaimer.`);
+  assert(html.includes("local-first planning aid"), `${file} metadata must preserve planning-aid positioning.`);
+  assert(!html.includes("financial independence engine"), `${file} metadata must not position the app as an advisory engine.`);
+  assert(!/\b(eligibility determination|official government\/benefit determination|individualized professional recommendation)\b/i.test(html), `${file} must not imply eligibility or professional recommendation output.`);
   assert(!html.includes("http://"), `${file} must not reference insecure URLs.`);
 }
 
