@@ -39,6 +39,7 @@ This public-safe receipt keeps nFIRE claims tied to evidence instead of chat his
 ## Design Language Evidence
 
 - UI changes must preserve a modern minimalist, utilitarian, professional, joyful, responsive, planning-aid-contextual design language with local CSS/tokens, semantic native controls, visible focus, reduced-motion-safe transitions, no horizontal overflow, and no component overlap.
+- Signature Ecosystem Evidence: nFIRE must look and feel like part of the shared `shfqrkhn` ecosystem while staying contextual to assumption clarity, year-by-year planning, and planning-aid disclaimers.
 - MIT UI libraries/resources such as Uiverse, Open Props, Primer, Radix Colors, Pico CSS, Heroicons, Bootstrap Icons, Floating UI, or A11y Dialog are inspiration sources only unless a source-backed, license-checked, tested need justifies a dependency.
 - Reject browser JS popups, blocking overlays, arbitrary component copy-paste, mixed visual systems, unbounded animation, external CDNs, or styling that makes assumptions, disclaimers, or solvency evidence less clear.
 
@@ -73,6 +74,7 @@ This public-safe receipt keeps nFIRE claims tied to evidence instead of chat his
 | Input accessibility | `PASS_WITH_LIMITATIONS` | static touch-friendly checks, Playwright keyboard/focus/name checks, and manual/live verification when performed | Does not certify screen-reader behavior or every input path. |
 | Single input operation | `PASS_WITH_LIMITATIONS` | input accessibility evidence, Playwright pointer/keyboard/touch smoke paths, no browser popup policy | Does not certify every OS assistive technology or unusual HID/browser pairing. |
 | Design language/UI safety | `PASS_WITH_LIMITATIONS` | handoff/evidence docs, static tests, artifact checks, Playwright overflow/control checks, visual/manual checks where run | Does not certify every viewport or assistive technology; planning surfaces may stay denser than portfolio surfaces. |
+| Signature ecosystem fit | `PASS_WITH_LIMITATIONS` | shared signature design system reference, design evidence, static/artifact/UI smoke tests | Does not require identical UI components; planning tables and explainability panels remain domain-specific. |
 | Recovery/data safety | `PASS_WITH_LIMITATIONS` | README export/backup guidance, static tests, artifact consistency script, Playwright export/import/reload smoke path | Does not guarantee recovery after local browser data loss. |
 | Mission-critical reliability | `PASS_WITH_LIMITATIONS` | mission-critical reliability evidence, static/artifact/UI smoke tests | Does not provide financial advice, professional review, guaranteed outcomes, cloud backup, or regulated-grade infrastructure. |
 

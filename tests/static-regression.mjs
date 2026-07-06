@@ -167,7 +167,7 @@ for (const phrase of ["paths-ignore:", "tests/**", "node_modules/**", "test-resu
 for (const phrase of ["Input Accessibility Evidence", "keyboard only", "mouse/pointer only", "touch only", "platform-limited input only", "No critical workflow may require", "platform text-entry support", "Single input operation"]) {
   assert(evidenceReceipt.includes(phrase), `Evidence receipt missing input accessibility term: ${phrase}`);
 }
-for (const phrase of ["Design Language Evidence", "modern minimalist", "Uiverse", "Open Props", "Design language/UI safety", "browser JS popups", "component overlap"]) {
+for (const phrase of ["Design Language Evidence", "Signature Ecosystem Evidence", "shared `shfqrkhn` ecosystem", "Signature ecosystem fit", "modern minimalist", "Uiverse", "Open Props", "Design language/UI safety", "browser JS popups", "component overlap"]) {
   assert(evidenceReceipt.includes(phrase), `Evidence receipt missing design language term: ${phrase}`);
 }
 for (const phrase of ["Recovery And Data Safety Evidence", "Export, backup, reset", "user-controlled", "local-first", "browser data loss", "Recovery/data safety"]) {
@@ -182,7 +182,7 @@ for (const phrase of ["Assumption And Explainability Evidence", "user-editable p
 for (const phrase of ["OmniOS Transfer Contract", "Product truth", "Execution truth", "Evidence truth", "Operations truth", "Transfer truth", "GitHub Releases stay absent"]) {
   assert(handoff.includes(phrase), `Handoff missing OmniOS transfer contract term: ${phrase}`);
 }
-for (const phrase of ["Design truth", "Single input truth", "modern minimalist", "MIT UI libraries/resources", "browser JS popups", "arbitrary component copy-paste", "combined input-mode path"]) {
+for (const phrase of ["Ecosystem truth", "shared signature design system", "Design truth", "Single input truth", "modern minimalist", "MIT UI libraries/resources", "browser JS popups", "arbitrary component copy-paste", "combined input-mode path"]) {
   assert(handoff.includes(phrase), `Handoff missing design truth term: ${phrase}`);
 }
 for (const phrase of ["Reliability truth", "self-checking", "crash-recoverable", "state-explicit", "TDD/SDD-backed", "remove complexity"]) {
