@@ -18,7 +18,14 @@ for file in index.html 404.html; do
   grep -q "touch-action: manipulation" "$file"
   grep -q "github.com/sponsors/shfqrkhn?o=esb" "$file"
   grep -q "Planning aid only" "$file"
+  grep -q "./nfire-ui-guard.js" "$file"
 done
+
+grep -q "__nfireStatus" nfire-ui-guard.js
+grep -q "__nfireConfirmReset" nfire-ui-guard.js
+grep -q "labelIconControls" nfire-ui-guard.js
+grep -q "Restore default planning data" nfire-ui-guard.js
+! grep -ER "(^|[^[:alnum:]_$])(alert|confirm|prompt)[[:space:]]*\\(" index.html 404.html nfire-ui-guard.js assets/index-F7z_Yzm8.js
 
 grep -q "upgrade-insecure-requests" _headers
 grep -q "Cross-Origin-Resource-Policy: same-origin" _headers

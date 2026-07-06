@@ -26,6 +26,9 @@ Maintain nFIRE as the finance and solvency-planning flagship. It must stay stati
 - Execution truth: preserve assumption, artifact-consistency, static, export/import, and disclaimer gates before publishing.
 - Evidence truth: use `docs/EVIDENCE_RECEIPT.md`, visible assumptions, artifact checks, and tests; public claims must stay within `PASS` or `PASS_WITH_LIMITATIONS`.
 - Operations truth: live Pages or current main repository ZIP are the only distribution paths; GitHub Releases stay absent.
+- Reliability truth: keep planning, assumption, export/import, reset, and artifact paths self-checking, crash-recoverable, state-explicit, modular, maintainable, simple, one-input accessible, and TDD/SDD-backed; remove complexity that does not improve resilience or usability.
+- Design truth: keep UI changes modern minimalist, utilitarian, professional, joyful, responsive, and contextual to planning-aid workflows; use local CSS/tokens and native controls first, treat MIT UI libraries/resources as inspiration only unless a source-backed need justifies a dependency, and reject browser JS popups, blocking overlays, overlapping components, inaccessible controls, unbounded motion, or arbitrary component copy-paste.
+- Single input truth: after setup, critical planning workflows must remain fully operable by keyboard only, mouse/pointer only, touch only, or platform-limited input only; never require a combined input-mode path.
 - Transfer truth: update this handoff and the evidence receipt when assumptions, calculations, disclaimers, artifacts, or public-surface guarantees change.
 
 ## Doctrine Delta Decision
@@ -53,7 +56,7 @@ Run after material changes:
 npm run qa
 ```
 
-Also perform link/media checks, a secret scan, and local/static smoke checks before public ZIP/download-facing or Pages updates.
+`npm run qa` covers static regression, artifact consistency, and Playwright UI smoke checks. Also perform link/media checks, a secret scan, and live Pages checks before public ZIP/download-facing or Pages updates.
 
 ## Known Continuation Priorities
 

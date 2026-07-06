@@ -31,15 +31,29 @@ This public-safe receipt keeps nFIRE claims tied to evidence instead of chat his
 
 ## Input Accessibility Evidence
 
-- Critical planning workflows must remain usable by keyboard-only, mouse/pointer-only, and touch-only users.
-- Accessibility claims require current evidence from static control checks, touch-action checks, focus/label review, and live/manual verification where applicable.
-- If a workflow lacks direct input-mode coverage, label it `PASS_WITH_LIMITATIONS` or `NOT_RUN`; do not claim full accessibility from static rendering alone.
+- After setup, critical planning workflows must remain fully usable with one available input mode: keyboard only, mouse/pointer only, touch only, or platform-limited input only.
+- No critical workflow may require a combined keyboard-plus-pointer, keyboard-plus-touch, hover-plus-keyboard, drag-plus-keyboard, or browser-popup path.
+- Accessibility claims require current evidence from static control checks, touch-action checks, focus/label review, Playwright UI smoke coverage, platform text-entry support, and live/manual verification where applicable.
+- If keyboard-only, mouse-only, touch-only, or platform-limited operation is not directly covered, label it `PASS_WITH_LIMITATIONS` or `NOT_RUN`; do not claim full accessibility from static rendering alone.
+
+## Design Language Evidence
+
+- UI changes must preserve a modern minimalist, utilitarian, professional, joyful, responsive, planning-aid-contextual design language with local CSS/tokens, semantic native controls, visible focus, reduced-motion-safe transitions, no horizontal overflow, and no component overlap.
+- MIT UI libraries/resources such as Uiverse, Open Props, Primer, Radix Colors, Pico CSS, Heroicons, Bootstrap Icons, Floating UI, or A11y Dialog are inspiration sources only unless a source-backed, license-checked, tested need justifies a dependency.
+- Reject browser JS popups, blocking overlays, arbitrary component copy-paste, mixed visual systems, unbounded animation, external CDNs, or styling that makes assumptions, disclaimers, or solvency evidence less clear.
 
 ## Recovery And Data Safety Evidence
 
 - Export, backup, reset, browser-storage, and recovery claims must remain user-controlled, local-first, and tied to current tests or explicit manual evidence.
 - Recovery claims may cover documented export/backup expectations and artifact safety only within tested paths; they must not imply professional recordkeeping, cloud backup, or reconstruction after browser data loss.
 - If a storage, export/import, or recovery path is not covered in the current pass, label it `PASS_WITH_LIMITATIONS` or `NOT_RUN` before public use.
+
+## Mission-Critical Reliability Evidence
+
+- Critical planning workflows must stay self-checking, crash-recoverable, state-explicit, modular, maintainable, simple, one-input accessible, and TDD/SDD-backed.
+- Runtime failures must fail closed with visible in-app status, preserved local user control, no browser popup APIs, no hidden upload, and no advice or eligibility escalation.
+- New complexity is acceptable only when it directly improves resilience, usability, assumption clarity, state recovery, or maintainability and is covered by current tests or explicit evidence.
+- Autonomous AI-assisted development must start from current files, add or update tests before broad calculation or artifact changes, keep claims inside evidence boundaries, and leave a reproducible recovery path.
 
 ## Assumption And Explainability Evidence
 
@@ -56,8 +70,11 @@ This public-safe receipt keeps nFIRE claims tied to evidence instead of chat his
 | Explicit assumptions | `PASS_WITH_LIMITATIONS` | README, app flow, static tests, assumption/explainability evidence | Assumption correctness is not a professional review or external policy verification. |
 | Year-by-year solvency illustration | `PASS_WITH_LIMITATIONS` | app behavior, documented formulas, artifact checks | Results are illustrations, not guarantees, advice, or regulated determinations. |
 | Repository ZIP safety | `PASS_WITH_LIMITATIONS` | `docs/REPO_ZIP_POLICY.md`, `git archive`, artifact consistency script | Recheck no user plans, exports, PII, backups, or private notes are bundled. |
-| Input accessibility | `PASS_WITH_LIMITATIONS` | static touch-friendly checks and manual/live verification when performed | Does not certify screen-reader behavior or every input path. |
-| Recovery/data safety | `PASS_WITH_LIMITATIONS` | README export/backup guidance, static tests, artifact consistency script | Does not guarantee recovery after local browser data loss. |
+| Input accessibility | `PASS_WITH_LIMITATIONS` | static touch-friendly checks, Playwright keyboard/focus/name checks, and manual/live verification when performed | Does not certify screen-reader behavior or every input path. |
+| Single input operation | `PASS_WITH_LIMITATIONS` | input accessibility evidence, Playwright pointer/keyboard/touch smoke paths, no browser popup policy | Does not certify every OS assistive technology or unusual HID/browser pairing. |
+| Design language/UI safety | `PASS_WITH_LIMITATIONS` | handoff/evidence docs, static tests, artifact checks, Playwright overflow/control checks, visual/manual checks where run | Does not certify every viewport or assistive technology; planning surfaces may stay denser than portfolio surfaces. |
+| Recovery/data safety | `PASS_WITH_LIMITATIONS` | README export/backup guidance, static tests, artifact consistency script, Playwright export/import/reload smoke path | Does not guarantee recovery after local browser data loss. |
+| Mission-critical reliability | `PASS_WITH_LIMITATIONS` | mission-critical reliability evidence, static/artifact/UI smoke tests | Does not provide financial advice, professional review, guaranteed outcomes, cloud backup, or regulated-grade infrastructure. |
 
 ## Required Before Public-Facing Change
 

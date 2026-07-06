@@ -21,13 +21,16 @@ const evidenceReceipt = read("docs/EVIDENCE_RECEIPT.md");
 const handoff = read("docs/AI_MAINTAINER_HANDOFF.md");
 const codeqlWorkflow = read(".github/workflows/codeql.yml");
 const codeqlConfig = read(".github/codeql/codeql-config.yml");
+const staticCheckWorkflow = read(".github/workflows/static-check.yml");
 const pkg = JSON.parse(read("package.json"));
 const manifest = JSON.parse(read("manifest.webmanifest"));
 const sitemap = read("sitemap.xml");
 const robots = read("robots.txt");
 const sw = read("sw.js");
 const headers = read("_headers");
+const uiGuard = read("nfire-ui-guard.js");
 const forbiddenTrackedPathPattern = /(^|\/)(node_modules|offline|linkedin-post-package|test-results|playwright-report|\.codex-remote-attachments)(\/|$)|^data\/(manual-overrides\.json|latest-simulation\.json|scoreboards)(\/|$)|(^|\/).*\.((env)|(pem)|(key)|(p12)|(pfx))$|(^|\/)(exports?|backups?|logs?|scratch)(\/|$)/i;
+const popupPattern = /\b(alert|confirm|prompt)\s*\(/;
 const trackedFiles = execFileSync("git", ["ls-files"], { cwd: root, encoding: "utf8" })
   .split(/\r?\n/)
   .filter(Boolean)
@@ -53,12 +56,22 @@ function gitArchiveEntries() {
   return entries;
 }
 const archiveEntries = gitArchiveEntries();
+const pendingWorkspaceFiles = execFileSync("git", ["status", "--short"], { cwd: root, encoding: "utf8" })
+  .split(/\r?\n/)
+  .filter(Boolean)
+  .map((line) => line.slice(3).replace(/\\/g, "/").replace(/^"|"$/g, ""));
+const archiveOrPending = (file) => archiveEntries.includes(file) || pendingWorkspaceFiles.includes(file);
 const forbiddenArchiveEntries = archiveEntries.filter((file) => forbiddenTrackedPathPattern.test(file));
 const requiredArchiveEntries = [
   "index.html",
   "404.html",
   "README.md",
   "docs/REPO_ZIP_POLICY.md",
+  "package-lock.json",
+  "package.json",
+  "playwright.config.mjs",
+  "nfire-ui-guard.js",
+  "tests/ui-smoke.spec.mjs",
   "manifest.webmanifest",
   "sw.js",
   "_headers",
@@ -71,7 +84,7 @@ const md5Text = (file) =>
 assert(forbiddenTrackedFiles.length === 0, `Forbidden tracked paths: ${forbiddenTrackedFiles.join(", ")}`);
 assert(forbiddenArchiveEntries.length === 0, `Forbidden generated archive paths: ${forbiddenArchiveEntries.join(", ")}`);
 for (const file of requiredArchiveEntries) {
-  assert(archiveEntries.includes(file), `Generated repository archive must include runtime path: ${file}`);
+  assert(archiveOrPending(file), `Generated repository archive must include runtime path once committed: ${file}`);
 }
 const versionMatch = readme.match(/\*\*Version:\*\* v(\d+\.\d+\.\d+)/);
 assert(versionMatch, "README must expose the shipped app version.");
@@ -91,6 +104,7 @@ for (const [file, html] of [
   assert(html.includes("touch-action: manipulation"), `${file} must keep touch-friendly controls.`);
   assert(html.includes("github.com/sponsors/shfqrkhn?o=esb"), `${file} must expose the Sponsor link.`);
   assert(html.includes("Planning aid only. Not financial, investment, tax, legal, retirement, or eligibility advice."), `${file} must expose the finance and eligibility disclaimer.`);
+  assert(html.includes("./nfire-ui-guard.js"), `${file} must load the nonblocking UI guard.`);
   assert(html.includes("local-first planning aid"), `${file} metadata must preserve planning-aid positioning.`);
   assert(!html.includes("financial independence engine"), `${file} metadata must not position the app as an advisory engine.`);
   assert(!/\b(eligibility determination|official government\/benefit determination|individualized professional recommendation)\b/i.test(html), `${file} must not imply eligibility or professional recommendation output.`);
@@ -112,11 +126,17 @@ assert(zipPolicy.includes("User plans and exports must never be bundled"), "Repo
 assert(zipPolicy.includes("Claims of financial, investment, tax, legal, retirement, or eligibility advice"), "Repository ZIP policy must block advice claims.");
 assert(zipPolicy.includes("git archive"), "Repository ZIP policy must tie download claims to generated archive evidence.");
 assert(pkg.scripts?.["test:artifact"] === "bash scripts/verify_artifact_consistency.sh", "package must expose artifact consistency verification.");
-assert(pkg.scripts?.qa === "npm test && npm run test:artifact", "package must expose the full QA gate.");
+assert(pkg.scripts?.["test:ui"] === "playwright test tests/ui-smoke.spec.mjs", "package must expose browser UI smoke verification.");
+assert(pkg.scripts?.qa === "npm test && npm run test:artifact && npm run test:ui", "package must expose the full QA gate.");
+assert(pkg.devDependencies?.["@playwright/test"], "package must pin Playwright for autonomous UI smoke coverage.");
 assert(readme.includes("npm run qa"), "README must document the full QA gate.");
 assert(zipPolicy.includes("npm run qa"), "Repository ZIP policy must include the full QA gate.");
 assert(handoff.includes("npm run qa"), "Maintainer handoff must include the full QA gate.");
 assert(evidenceReceipt.includes("npm run qa"), "Evidence receipt must include the full QA gate.");
+assert(readme.includes("Playwright UI smoke gate"), "README must document browser UI smoke coverage.");
+for (const phrase of ["browser UI smoke coverage", "onboarding", "export/import", "accessible control names"]) {
+  assert(zipPolicy.includes(phrase), `Repository ZIP policy missing UI smoke coverage term: ${phrase}`);
+}
 assert(evidenceReceipt.includes("PASS_WITH_LIMITATIONS"), "Evidence receipt must define limited claims.");
 assert(evidenceReceipt.includes("Planning aid only"), "Evidence receipt must preserve planning-aid boundary.");
 assert(evidenceReceipt.includes("No financial, tax, legal, investment, retirement, or eligibility advice."), "Evidence receipt must block advice claims.");
@@ -138,14 +158,23 @@ for (const phrase of ["Runtime app code scanning", ".github/workflows/codeql.yml
 for (const phrase of ["github/codeql-action/init@v4", "github/codeql-action/analyze@v4", "languages: javascript-typescript", "security-events: write", "config-file: ./.github/codeql/codeql-config.yml"]) {
   assert(codeqlWorkflow.includes(phrase), `CodeQL workflow missing: ${phrase}`);
 }
+for (const phrase of ["npm ci", "npx playwright install --with-deps chromium", "npm run qa"]) {
+  assert(staticCheckWorkflow.includes(phrase), `Static check workflow missing browser QA step: ${phrase}`);
+}
 for (const phrase of ["paths-ignore:", "tests/**", "node_modules/**", "test-results/**", "playwright-report/**"]) {
   assert(codeqlConfig.includes(phrase), `CodeQL config missing: ${phrase}`);
 }
-for (const phrase of ["Input Accessibility Evidence", "keyboard-only", "mouse/pointer-only", "touch-only", "focus/label review", "Input accessibility"]) {
+for (const phrase of ["Input Accessibility Evidence", "keyboard only", "mouse/pointer only", "touch only", "platform-limited input only", "No critical workflow may require", "platform text-entry support", "Single input operation"]) {
   assert(evidenceReceipt.includes(phrase), `Evidence receipt missing input accessibility term: ${phrase}`);
+}
+for (const phrase of ["Design Language Evidence", "modern minimalist", "Uiverse", "Open Props", "Design language/UI safety", "browser JS popups", "component overlap"]) {
+  assert(evidenceReceipt.includes(phrase), `Evidence receipt missing design language term: ${phrase}`);
 }
 for (const phrase of ["Recovery And Data Safety Evidence", "Export, backup, reset", "user-controlled", "local-first", "browser data loss", "Recovery/data safety"]) {
   assert(evidenceReceipt.includes(phrase), `Evidence receipt missing recovery/data safety term: ${phrase}`);
+}
+for (const phrase of ["Mission-Critical Reliability Evidence", "self-checking", "crash-recoverable", "state-explicit", "TDD/SDD", "Autonomous AI-assisted development", "Mission-critical reliability"]) {
+  assert(evidenceReceipt.includes(phrase), `Evidence receipt missing mission-critical reliability term: ${phrase}`);
 }
 for (const phrase of ["Assumption And Explainability Evidence", "user-editable planning inputs", "professional review, advice, eligibility screening", "visible inputs", "documented formulas", "source, freshness, limitation, and failure behavior"]) {
   assert(evidenceReceipt.includes(phrase), `Evidence receipt missing assumption/explainability term: ${phrase}`);
@@ -153,9 +182,18 @@ for (const phrase of ["Assumption And Explainability Evidence", "user-editable p
 for (const phrase of ["OmniOS Transfer Contract", "Product truth", "Execution truth", "Evidence truth", "Operations truth", "Transfer truth", "GitHub Releases stay absent"]) {
   assert(handoff.includes(phrase), `Handoff missing OmniOS transfer contract term: ${phrase}`);
 }
+for (const phrase of ["Design truth", "Single input truth", "modern minimalist", "MIT UI libraries/resources", "browser JS popups", "arbitrary component copy-paste", "combined input-mode path"]) {
+  assert(handoff.includes(phrase), `Handoff missing design truth term: ${phrase}`);
+}
+for (const phrase of ["Reliability truth", "self-checking", "crash-recoverable", "state-explicit", "TDD/SDD-backed", "remove complexity"]) {
+  assert(handoff.includes(phrase), `Handoff missing reliability truth term: ${phrase}`);
+}
 for (const phrase of ["Doctrine Delta Decision", "promote", "reject", "quarantine", "keep_local", "source-backed, reusable, non-secret", "explicitly approves publication"]) {
   assert(handoff.includes(phrase), `Handoff missing doctrine delta term: ${phrase}`);
 }
+assert(!popupPattern.test(`${index}\n${notFound}\n${uiGuard}\n${sw}\n${read("assets/index-F7z_Yzm8.js")}`), "Runtime must not use browser popup APIs.");
+assert(uiGuard.includes("__nfireStatus") && uiGuard.includes("__nfireConfirmReset") && uiGuard.includes("Press reset again within 5 seconds"), "UI guard must provide nonblocking status and reset confirmation.");
+assert(uiGuard.includes("labelIconControls") && uiGuard.includes("Restore default planning data") && uiGuard.includes("Toggle current savings details"), "UI guard must label icon-only controls.");
 
 for (const file of [
   ".nojekyll",
@@ -187,9 +225,10 @@ assert(headers.includes("frame-ancestors 'none'"), "_headers must keep the live 
 
 for (const asset of [...index.matchAll(/(?:src|href)="\.\/([^"]+)"/g)].map((match) => match[1])) {
   assert(exists(asset), `Referenced asset ${asset} must exist.`);
-  assert(archiveEntries.includes(asset), `Generated repository archive must include referenced asset: ${asset}`);
+  assert(archiveOrPending(asset), `Generated repository archive must include referenced asset once committed: ${asset}`);
 }
 assert(sw.includes("index.html"), "Service worker must precache the app shell.");
+assert(sw.includes(`{url:"nfire-ui-guard.js",revision:"${md5Text("nfire-ui-guard.js")}"}`), "Service worker nfire-ui-guard.js revision must match the nonblocking UI guard.");
 assert(sw.includes("manifest.webmanifest"), "Service worker must precache the manifest.");
 assert(sw.includes(`{url:"index.html",revision:"${md5Text("index.html")}"}`), "Service worker index.html revision must match the app shell.");
 assert(!sw.includes("http://") && !sw.includes("https://"), "Service worker must not call external URLs.");

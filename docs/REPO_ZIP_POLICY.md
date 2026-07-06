@@ -29,4 +29,5 @@ git diff --check
 ```
 
 Repository ZIP review must verify the ZIP has no user data, backups, private notes, or advice/guarantee language.
+The QA gate must include browser UI smoke coverage for onboarding, core planning inputs, export/import, reset confirmation, reload, horizontal overflow, and accessible control names.
 Use `git archive --format=tar HEAD` as the local generated-archive proxy when checking runtime entries, referenced assets, and forbidden archive paths before public download-facing changes.

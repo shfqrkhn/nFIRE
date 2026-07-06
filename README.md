@@ -87,7 +87,7 @@ Host the repository root on GitHub Pages. The app is static and can also be prev
 npm run qa
 ```
 
-`npm run qa` runs the static regression gate and artifact consistency check.
+`npm run qa` runs the static regression gate, artifact consistency check, and Playwright UI smoke gate.
 
 ## Maintenance
 
