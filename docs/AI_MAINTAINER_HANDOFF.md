@@ -42,6 +42,8 @@ Maintain nFIRE as the finance and solvency-planning flagship. It must stay stati
 
 - `index.html`: static app entrypoint.
 - `assets/`: app assets.
+- `src/model-runtime.js`: readable financial-model source of truth recovered from the v10.1.40 artifact.
+- `docs/MODEL_ASSUMPTIONS.md`: formulas, policy basis, behavioral conventions, and validation limits.
 - `scripts/`: validation and public ZIP consistency scripts.
 - `manifest.webmanifest`: install metadata.
 - `sw.js`: service worker.
@@ -58,6 +60,8 @@ npm run qa
 ```
 
 `npm run qa` covers static regression, artifact consistency, and Playwright UI smoke checks. Also perform link/media checks, a secret scan, and live Pages checks before public ZIP/download-facing or Pages updates.
+
+Run `npm run build:model` after changing the model source. The generated artifact must then pass `npm run verify:model`. The original React/UI source is not present in repository history, so the pinned minified UI shell remains a documented `PASS_WITH_LIMITATIONS` boundary; it is not the model source of truth.
 
 ## Known Continuation Priorities
 
