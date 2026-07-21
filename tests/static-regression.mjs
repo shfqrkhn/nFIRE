@@ -29,6 +29,8 @@ const robots = read("robots.txt");
 const sw = read("sw.js");
 const headers = read("_headers");
 const uiGuard = read("nfire-ui-guard.js");
+const modelSource = read("src/model-runtime.js");
+const modelArtifact = read("assets/index-F7z_Yzm8.js");
 const forbiddenTrackedPathPattern = /(^|\/)(node_modules|offline|linkedin-post-package|test-results|playwright-report|\.codex-remote-attachments)(\/|$)|^data\/(manual-overrides\.json|latest-simulation\.json|scoreboards)(\/|$)|(^|\/).*\.((env)|(pem)|(key)|(p12)|(pfx))$|(^|\/)(exports?|backups?|logs?|scratch)(\/|$)/i;
 const popupPattern = /\b(alert|confirm|prompt)\s*\(/;
 const trackedFiles = execFileSync("git", ["ls-files"], { cwd: root, encoding: "utf8" })
@@ -72,6 +74,10 @@ const requiredArchiveEntries = [
   "playwright.config.mjs",
   "nfire-ui-guard.js",
   "tests/ui-smoke.spec.mjs",
+  "tests/model-golden.mjs",
+  "src/model-runtime.js",
+  "scripts/build-model-artifact.mjs",
+  "docs/MODEL_ASSUMPTIONS.md",
   "manifest.webmanifest",
   "sw.js",
   "_headers",
@@ -126,14 +132,22 @@ assert(zipPolicy.includes("User plans and exports must never be bundled"), "Repo
 assert(zipPolicy.includes("Claims of financial, investment, tax, legal, retirement, or eligibility advice"), "Repository ZIP policy must block advice claims.");
 assert(zipPolicy.includes("git archive"), "Repository ZIP policy must tie download claims to generated archive evidence.");
 assert(pkg.scripts?.["test:artifact"] === "bash scripts/verify_artifact_consistency.sh", "package must expose artifact consistency verification.");
+assert(pkg.scripts?.["build:model"] === "node scripts/build-model-artifact.mjs", "package must expose the deterministic model build.");
+assert(pkg.scripts?.["verify:model"] === "node scripts/build-model-artifact.mjs --check", "package must expose model drift verification.");
 assert(pkg.scripts?.["test:ui"] === "playwright test tests/ui-smoke.spec.mjs", "package must expose browser UI smoke verification.");
-assert(pkg.scripts?.qa === "npm test && npm run test:artifact && npm run test:ui", "package must expose the full QA gate.");
+assert(pkg.scripts?.qa === "npm test && npm run verify:model && npm run test:artifact && npm run test:ui", "package must expose the full QA gate.");
 assert(pkg.devDependencies?.["@playwright/test"], "package must pin Playwright for autonomous UI smoke coverage.");
 assert(readme.includes("npm run qa"), "README must document the full QA gate.");
 assert(zipPolicy.includes("npm run qa"), "Repository ZIP policy must include the full QA gate.");
 assert(handoff.includes("npm run qa"), "Maintainer handoff must include the full QA gate.");
 assert(evidenceReceipt.includes("npm run qa"), "Evidence receipt must include the full QA gate.");
 assert(readme.includes("Playwright UI smoke gate"), "README must document browser UI smoke coverage.");
+assert(readme.includes("docs/MODEL_ASSUMPTIONS.md"), "README must link the model assumptions and limitations.");
+for (const phrase of ["createEngine", "calculateTax", "grossUpWithdrawal", "calculatePension", "testSolvency", "simulate"]) {
+  assert(modelSource.includes(phrase), `Readable model source missing recovered function: ${phrase}`);
+}
+assert(modelArtifact.includes("NFIRE_MODEL_SOURCE_START") && modelArtifact.includes("NFIRE_MODEL_SOURCE_END"), "Runtime artifact must contain generated model markers.");
+assert(modelArtifact.includes(modelSource.trim()), "Runtime artifact must embed the readable source verbatim.");
 for (const phrase of ["browser UI smoke coverage", "onboarding", "export/import", "accessible control names"]) {
   assert(zipPolicy.includes(phrase), `Repository ZIP policy missing UI smoke coverage term: ${phrase}`);
 }
@@ -229,6 +243,7 @@ for (const asset of [...index.matchAll(/(?:src|href)="\.\/([^"]+)"/g)].map((matc
 }
 assert(sw.includes("index.html"), "Service worker must precache the app shell.");
 assert(sw.includes(`{url:"nfire-ui-guard.js",revision:"${md5Text("nfire-ui-guard.js")}"}`), "Service worker nfire-ui-guard.js revision must match the nonblocking UI guard.");
+assert(sw.includes(`{url:"assets/index-F7z_Yzm8.js",revision:"${md5Text("assets/index-F7z_Yzm8.js")}"}`), "Service worker app asset revision must match the generated financial model artifact.");
 assert(sw.includes("manifest.webmanifest"), "Service worker must precache the manifest.");
 assert(sw.includes(`{url:"index.html",revision:"${md5Text("index.html")}"}`), "Service worker index.html revision must match the app shell.");
 assert(!sw.includes("http://") && !sw.includes("https://"), "Service worker must not call external URLs.");

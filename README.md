@@ -12,6 +12,7 @@ Deterministic financial independence and solvency engine.
 - **Portfolio Role:** Finance and planning flagship.
 - **Maintainer handoff:** [`docs/AI_MAINTAINER_HANDOFF.md`](./docs/AI_MAINTAINER_HANDOFF.md)
 - **Repository ZIP policy:** [`docs/REPO_ZIP_POLICY.md`](./docs/REPO_ZIP_POLICY.md)
+- **Model formulas and limitations:** [`docs/MODEL_ASSUMPTIONS.md`](./docs/MODEL_ASSUMPTIONS.md)
 
 nFIRE models long-term financial independence with explicit year-by-year assumptions instead of hiding the plan behind a simple rule of thumb.
 
@@ -71,7 +72,9 @@ nFIRE is the finance flagship. `TS-Dash` remains a stable time-series dashboard 
 .
 ├── index.html
 ├── assets/
+├── src/model-runtime.js
 ├── scripts/
+├── tests/
 ├── manifest.webmanifest
 ├── sw.js
 └── screenshot-main.png
@@ -88,6 +91,8 @@ npm run qa
 ```
 
 `npm run qa` runs the static regression gate, artifact consistency check, and Playwright UI smoke gate.
+
+`npm run build:model` deterministically injects the readable financial model into the pinned UI artifact. `npm run verify:model` checks that generated model code has not drifted.
 
 ## Maintenance
 

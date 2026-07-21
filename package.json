@@ -4,10 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node tests/static-regression.mjs",
+    "build:model": "node scripts/build-model-artifact.mjs",
+    "verify:model": "node scripts/build-model-artifact.mjs --check",
+    "test": "node tests/model-golden.mjs && node tests/static-regression.mjs",
     "test:artifact": "bash scripts/verify_artifact_consistency.sh",
     "test:ui": "playwright test tests/ui-smoke.spec.mjs",
-    "qa": "npm test && npm run test:artifact && npm run test:ui"
+    "qa": "npm test && npm run verify:model && npm run test:artifact && npm run test:ui"
   },
   "devDependencies": {
     "@playwright/test": "1.61.1"
