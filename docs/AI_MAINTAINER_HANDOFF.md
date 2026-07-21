@@ -1,6 +1,6 @@
 # AI Maintainer Handoff
 
-Last updated: 2026-07-03.
+Last updated: 2026-07-20.
 Repo: `D:\VSCode\GH\nFIRE`.
 
 Treat this as a public-safe continuation map. Re-read current files before editing.
@@ -16,9 +16,9 @@ Maintain nFIRE as the finance and solvency-planning flagship. It must stay stati
 - Preserve Canadian-style planning orientation unless the repo deliberately expands scope.
 - Keep outputs explainable and assumption-driven, not advisory or guaranteed.
 - Keep repository ZIP/download contents minimal and public-safe.
-- Preserve the future path toward Civic SourceGraph Canada only when it strengthens official-source, household-impact, missed-money prevention, and remedy/access handoff workflows.
+- Keep `CivicSourceGraphCanada` as a separate trust-sensitive project. Share only deliberately reusable, public-safe patterns or explicit data contracts; do not fold civic eligibility, source-ledger, or remedy workflows into nFIRE.
 - Do not determine eligibility, file claims, provide legal/tax/financial advice, handle money, or collect sensitive personal data by default.
-- Keep any civic evolution official-source-led, privacy-first, static-first, source-freshness-aware, and clear that the app is an unofficial handoff aid.
+- Do not imply that nFIRE determines eligibility or provides a civic-source handoff. The separate Civic project owns those boundaries.
 
 ## OmniOS Transfer Contract
 
@@ -64,5 +64,5 @@ npm run qa
 1. Preserve financial disclaimer clarity.
 2. Keep assumptions visible and testable.
 3. Improve onboarding only when it reduces user error.
-4. If evolving toward Civic SourceGraph Canada, keep nFIRE's solvency logic as one module inside a broader official-source workflow rather than bolting on unrelated civic features.
-5. Preserve missed-money prevention, access handoff, recall/remedy handoff, official-source provenance, and no-sensitive-data rules if that evolution proceeds.
+4. Keep the separate Civic project out of nFIRE's runtime and public claims; coordinate only through explicit, reviewed, public-safe contracts when a real integration need exists.
+5. Preserve nFIRE's finance-planning scope and do not import Civic's missed-money, access-handoff, recall/remedy, or source-ledger responsibilities.
